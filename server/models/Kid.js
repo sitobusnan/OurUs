@@ -16,5 +16,5 @@ const kidSchema = new Schema({
   }
 });
 
-const Kid = mongoose.model('User', kidSchema);
+const Kid = mongoose.model('Kid', kidSchema);
 module.exports = Kid;

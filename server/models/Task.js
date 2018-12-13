@@ -4,8 +4,11 @@ const Schema   = mongoose.Schema;
 const taskSchema = new Schema({
   kid: String,
   tutors: [],
-  kids: [],
-  photos: []
+  type: { type: String, enum: ['Education', 'Home']},
+  text: String,
+  status: true,
+  date: Date,
+  place: String
 }, {
   timestamps: {
     createdAt: 'created_at',

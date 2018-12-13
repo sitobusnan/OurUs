@@ -2,10 +2,13 @@ const express = require("express");
 const passport = require('passport');
 const router = express.Router();
 const User = require("../models/User");
-
+const Family = require("../models/Family");
+const Kid = require("../models/Kid");
+const uploadCloud = require("../config/cloudinary");
 // Bcrypt to encrypt passwords
 const bcrypt = require("bcrypt");
 const bcryptSalt = 10;
+let userId = '';
 
 
 
@@ -14,9 +17,28 @@ router.post('/login', function(req, res, next) {
   passport.authenticate('local', function(err, user, info) {
     if (err) { return res.status(500).json({message: "Authentication error" }) }
     if (!user) { return res.status(500).json({message: "Indicate username doesnt exist" }) }
+    
     req.logIn(user, function(err) {
+      
       if (err) { return res.status(500).json({message: "Authentication error"}) }
-      return res.status(200).json({user});
+      Family.findOne({ name : req.user.family })
+    .populate('tutors')
+    .populate('kids')
+    .then((family) => {
+      return res.status(200).json({user:req.user,family:family});
+    })
+    .catch((err) => {res.status(403).json({ message: "Something went wrong looking for your family", err })})
+
+
+
+
+
+
+      // Family.findOne({ name : user.family }, (err, family) => {
+      //   console.log(family)
+      //   if(family===null){res.status(403).json({ message: "Something went wrong looking for your family" });}
+      //   return res.status(200).json({user:user,family:family});
+      // })
     });
   })(req, res, next);
 });
@@ -26,8 +48,12 @@ router.post('/login', function(req, res, next) {
 router.post("/signup", (req, res, next) => {
   const username = req.body.username;
   const password = req.body.password;
-  const campus = req.body.campus;
-  const course = req.body.course;
+  const email = req.body.email;
+  const family = req.body.family;
+  const rol = 'Admin';
+  const photo = "noProfile"
+  
+  
 
   if (username === "" || password === "") {
     res.status(500).json({ message: "Indicate username and password" });
@@ -35,7 +61,6 @@ router.post("/signup", (req, res, next) => {
   }
 
   User.findOne({ username }, "username", (err, user) => {
-    console.log(err)
     if (user !== null) {
       res.status(403).json({ message: "The username already exists" });
       return;
@@ -43,22 +68,52 @@ router.post("/signup", (req, res, next) => {
 
     const salt = bcrypt.genSaltSync(bcryptSalt);
     const hashPass = bcrypt.hashSync(password, salt);
+    const characters ="0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ";
+    let token = "";
+    for (let i = 0; i < 25; i++) {
+      token += characters[Math.floor(Math.random() * characters.length)];
+    }
 
     const newUser = new User({
       username,
       password: hashPass,
-      campus,
-      course
+      rol: rol,
+      email,
+      family: family,
+      photo
     });
+    const newFamily = new Family({
+      name: family,
+      token: token
+    });
+    const newKid = Kid({
+      family: family
+    })
 
     newUser.save()
     .then((user) => {
-      res.status(200).json({user});
+      userId = user._id
+      newFamily.tutors = [userId]
+      newFamily.save()
+      .then((family)=>{
+        newKid.save()
+        .then(()=>{
+          res.status(200).json({message: "User Created"})
+        // res.status(200).json({user:user,family:family})
+      })
+    })
+    .catch(err => {
+      console.log(err)
+      res.status(500).json({message: "Something went wrong on family creation"})
+    })
     })
     .catch(err => {
       console.log(err)
       res.status(500).json({ message: "Something went wrong" });
     })
+
+    
+    
   });
 });
 
@@ -68,25 +123,53 @@ router.get("/logout", (req, res) => {
   
 });
 
-
-
-
-router.get("/loggedIn", (req, res) => {
-  if (req.isAuthenticated()) {
-    res.status(200).json(req.user);
-    return;
-}
-res.status(403).json({ message: 'Unauthorized' });
+router.get('/loggedin', (req, res) => {
+  if(req.isAuthenticated()) {
+    console.log(req.user.family)
+    Family.findOne({ name : req.user.family })
+    .populate('tutors')
+    .populate('kids')
+    .then((family) => {
+      return res.status(200).json({user:req.user,family:family});
+    })
+    .catch((err) => {res.status(403).json({ message: "Something went wrong looking for your family", err })})
+  } else {
+    return res.status(403).json({message: "Unauthorized"});
+  }
 })
 
 router.post("/edit", (req, res) => {
-  const {username,campus,course} = req.body;
-  User.findByIdAndUpdate(req.user._id, {username , campus , course }, {new: true})
+  const {username,email} = req.body;
+  User.findByIdAndUpdate(req.body.user, {username , email}, {new: true})
   .then((user)=>{
-    res.status(200).json({user})
+    Family.findOne({ name : user.family })
+    .populate('tutors')
+    .populate('kids')
+    .then((family) => {
+      return res.status(200).json({user:user,family:family});
+    })
+    .catch((err) => {res.status(403).json({ message: "Something went wrong looking for your family" })})
   }).catch((err)=>{
     res.status(403).json({ message: 'Something went wrong' });
   })
 })
+
+router.post("/editimg", uploadCloud.single("photo"),(req, res) => {
+  
+  User.findByIdAndUpdate(req.body.user, {photo:req.file.url}, {new: true})
+  .then((user)=>{
+    Family.findOne({ name : user.family })
+    .populate('tutors')
+    .populate('kids')
+    .then((family) => {
+      return res.status(200).json({user:user,family:family});
+    })
+    .catch((err) => {res.status(403).json({ message: "Something went wrong looking for your family" })})
+  }).catch((err)=>{
+    res.status(403).json({ message: 'Something went wrong' });
+  })
+})
+
+
 
 module.exports = router;

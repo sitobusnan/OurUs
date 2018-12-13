@@ -7,13 +7,17 @@ class AuthService {
       baseURL: "http://localhost:5000/api/auth",
       withCredentials: true
     })
+    this.mailService = axios.create({
+      baseURL: "http://localhost:5000/mail",
+      withCredentials: true
+    })
   }
 
   signup = (user) => {
-    console.log(user)
     // axios.post("http://localhost:5000/api/auth/signup", {user}, {withCredentials: true})
     return this.service.post('/signup', user)
-    .then(response => response.data)
+    .then((response) => {
+      return response.data})
   }
 
   login = (user) => {
@@ -24,13 +28,42 @@ class AuthService {
 
   loggedin = () => {
     return this.service.get('/loggedin')
-    .then(response => response.data);
+    .then(response => {return response.data})
   }
 
   logout = () => {
     return this.service.get('/logout')
     .then(response => response.data);
   }
+
+  editpro = (user) => {
+    return this.service.post('/edit', user)
+    .then(response => response.data);
+  }
+
+  editproimg = (user) => {
+    const formData = new FormData();
+    Object.keys(user).forEach(key => formData.append(key, user[key]));
+    return this.service.post('/editimg', formData)
+    .then(response => response.data);
+  }
+
+  mail = (mail,token) => {
+    console.log(mail,token)
+    return this.mailService.post('/sendMail',{mail:mail,token:token})
+    .then(response => { 
+      return response.data});
+  }
+
+  invitedSignup = (user) => {
+    console.log(user)
+    // axios.post("http://localhost:5000/api/auth/signup", {user}, {withCredentials: true})
+    return this.mailService.post('/confirm/:token', {user})
+    .then((response) => {
+      return response.data})
+  }
+
+  
 }
 
 export default AuthService;

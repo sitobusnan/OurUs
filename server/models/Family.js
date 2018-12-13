@@ -3,9 +3,10 @@ const Schema   = mongoose.Schema;
 
 const familySchema = new Schema({
   name: String,
-  tutors: [],
-  kids: [],
-  photos: []
+  tutors: [{ type : Schema.Types.ObjectId, ref: 'User' }],
+  kids: [{ type : Schema.Types.ObjectId, ref: 'Kid' }],
+  photos: [],
+  token: String
 }, {
   timestamps: {
     createdAt: 'created_at',
@@ -13,5 +14,5 @@ const familySchema = new Schema({
   }
 });
 
-const Family = mongoose.model('User', familySchema);
+const Family = mongoose.model('Family', familySchema);
 module.exports = Family;
