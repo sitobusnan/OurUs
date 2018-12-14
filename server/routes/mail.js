@@ -3,6 +3,10 @@ const express = require("express");
 const router = express.Router();
 const User = require("../models/User");
 const Family = require("../models/Family");
+const bcrypt = require("bcrypt");
+const bcryptSalt = 10;
+let userId = '';
+
 
 let transporter = nodemailer.createTransport({
   service: 'Gmail',
@@ -285,10 +289,12 @@ router.post("/confirm/:token", (req, res) => {
   
   Family.findOne({ token : token })
   .then((family)=> {
-    
+    const salt = bcrypt.genSaltSync(bcryptSalt);
+    const hashPass = bcrypt.hashSync(req.body.user.password, salt);
+
     const newUser = new User({
       username : req.body.user.username,
-      password: req.body.user.password,
+      password: hashPass,
       rol: rol,
       email: req.body.user.email,
       family: family.name,
@@ -296,7 +302,11 @@ router.post("/confirm/:token", (req, res) => {
     })
     newUser.save()
     .then((user)=>{
-      res.status(200).json({user})
+      Family.findOneAndUpdate({token : token},{$push:{tutors:user._id}}, {new: true})
+      .then((family)=>{
+        res.status(200).json({user})
+
+      })
     })
     .catch((err)=>console.log(err))
 

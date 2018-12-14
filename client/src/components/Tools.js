@@ -11,6 +11,10 @@ class AuthService {
       baseURL: "http://localhost:5000/mail",
       withCredentials: true
     })
+    this.elementsService = axios.create({
+      baseURL: "http://localhost:5000/elements",
+      withCredentials: true
+    })
   }
 
   signup = (user) => {
@@ -61,6 +65,13 @@ class AuthService {
     return this.mailService.post('/confirm/:token', {user})
     .then((response) => {
       return response.data})
+  }
+
+  newKid = (kid) => {
+    console.log(kid)
+    return this.elementsService.post('/newKid',{kid})
+    .then(response => { 
+      return response.data});
   }
 
   

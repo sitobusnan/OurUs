@@ -11,7 +11,7 @@ export default class Member extends Component {
     return (
       <div>
         <img src="" alt=""/>
-        <h1>{this.props.elem.username}</h1>
+        <h1>{this.props.elem.name}</h1>
       </div>
     )
   }

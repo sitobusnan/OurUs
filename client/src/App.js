@@ -6,6 +6,7 @@ import Signup from "./components/Signup";
 import Profile from "./components/Profile";
 import Family from "./components/Family";
 import Topbar from "./components/Topbar";
+import NewKid from "./components/NewKid";
 import InviteSignup from "./components/InviteSignup";
 import { Redirect, Switch, Route } from "react-router-dom";
 import AuthService from "./components/Tools";
@@ -17,7 +18,7 @@ class App extends Component {
     this.state = {
       user: null,
       family: null,
-      redirect: false
+      redirect: false,
     };
     this.authService = new AuthService();
     this.ifLoggedIn();
@@ -46,7 +47,7 @@ class App extends Component {
 
   render() {
     console.log(this.state)
-
+    
     if(this.state.redirect) {
       return <Redirect to="/"/>
     }
@@ -63,6 +64,11 @@ class App extends Component {
             exact
             path="/family"
             render={() => <Family user={this.state} />}
+          />
+          <Route
+            exact
+            path="/newkid"
+            render={() => <NewKid user={this.state} ifLoggedIn={this.ifLoggedIn} />}
           />
         </Switch>
         <button className="btn-logout" onClick={this.logout}>

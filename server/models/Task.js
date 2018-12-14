@@ -6,7 +6,7 @@ const taskSchema = new Schema({
   tutors: [],
   type: { type: String, enum: ['Education', 'Home']},
   text: String,
-  status: true,
+  status: Boolean,
   date: Date,
   place: String
 }, {
@@ -16,5 +16,5 @@ const taskSchema = new Schema({
   }
 });
 
-const Task = mongoose.model('User', taskSchema);
+const Task = mongoose.model('Task', taskSchema);
 module.exports = Task;

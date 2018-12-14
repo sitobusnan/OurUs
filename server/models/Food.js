@@ -11,5 +11,5 @@ const foodSchema = new Schema({
   }
 });
 
-const Food = mongoose.model('User', foodSchema);
+const Food = mongoose.model('Food', foodSchema);
 module.exports = Food;
