@@ -110,10 +110,22 @@ class AuthService {
   }
 
   newReminder = (reminder) => {
-    console.log("holita")
     return this.elementsService.post('/newReminder',reminder)
     .then(response => { 
       return response.data});
+  }
+
+  checkTask = (task) => {
+    return this.elementsService.post('/checkTask',task)
+    .then(response => { 
+      return response.data});
+  }
+
+  newPhoto = (kid) => {
+    const formData = new FormData();
+    Object.keys(kid).forEach(key => formData.append(key, kid[key]));
+    return this.service.post('/newPhoto', formData)
+    .then(response => response.data);
   }
 
   

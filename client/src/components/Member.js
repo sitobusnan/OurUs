@@ -1,8 +1,6 @@
 import React, { Component } from 'react'
 import noProfile from '../no_user.png'
-import {Link, Route} from "react-router-dom";
-import EditKid from "./EditKid";
-
+import {Link} from "react-router-dom";
 export default class Member extends Component {
   constructor(props){
     super(props)

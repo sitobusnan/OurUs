@@ -12,8 +12,6 @@ import InviteSignup from "./components/InviteSignup";
 import { Redirect, Switch, Route } from "react-router-dom";
 import AuthService from "./components/Tools";
 import EditKid from "./components/EditKid";
-import Datetime from "react-datetime-picker"
-import Calendar from "react-calendar"
 
 
 class App extends Component {

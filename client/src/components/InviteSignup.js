@@ -1,7 +1,6 @@
 import React, { Component } from 'react'
 import AuthService from "./Tools";
 import {Redirect} from "react-router-dom";
-import { Link} from "react-router-dom";
 
 export default class InviteSignup extends Component {
   constructor(props) {

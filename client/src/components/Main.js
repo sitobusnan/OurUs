@@ -1,6 +1,4 @@
 import React, { Component } from "react";
-import Datetime from "react-datetime-picker";
-import Calendar from "react-calendar";
 import { Button, Modal, Input, Col, Card, CardTitle } from "react-materialize";
 import AuthService from "./Tools";
 
@@ -29,7 +27,8 @@ export default class Main extends Component {
         status: true,
         date: null,
         family_name: this.props.user.family.name
-      }
+      },
+      photo:null
     };
     this.authService = new AuthService();
     this.today = new Date();
@@ -116,6 +115,12 @@ export default class Main extends Component {
     this.setState({ newTask: obj });
   };
 
+  handlerStateCheckTask = (status, id) => {
+    this.authService.checkTask({ status, id }).then(task => {
+      this.ifLoggedIn();
+    });
+  };
+
   handlerStateReminder = e => {
     const { name, value } = e.target;
     const obj = {
@@ -194,11 +199,33 @@ export default class Main extends Component {
       });
   };
 
+  handlerNewPhotoState = (e) => {
+      this.setState({...this.state, photo: e.target.files[0]})
+  }
+
+  handlerSetPhoto = (e) => {
+    this.setState({...this.state, photo: null})
+    this.ifLoggedIn();
+  }
+
+  handlerNewPhoto = e =>{
+    e.preventDefault();
+    const photo = e.target.files[0]
+    this.authService.newPhoto({photo:photo,family:this.state.family._id})
+    .then((family) => {
+      
+    });
+  };
+
   render() {
     // TASK TO DISPLAY
-    let taskToDispaly = this.state.family.tasks.map(element => {
-      if (element.date === this.today && element.status) {
-        return element;
+    let taskToDispaly = [];
+    this.state.family.tasks.forEach((element, index) => {
+      if (
+        element.date === this.today &&
+        element.tutor === this.state.user._id
+      ) {
+        taskToDispaly.push(element);
       }
     });
     let tasks = [];
@@ -222,13 +249,8 @@ export default class Main extends Component {
     });
 
     // REMINDERS TO DISPLAY
-    let remindersToDisplay = this.state.family.reminders.map(element => {
-      if (element.status) {
-        return element;
-      }
-    });
     let reminders = [];
-    remindersToDisplay.map(element => {
+    this.state.family.reminders.forEach(element => {
       return this.state.family.kids.forEach(kid => {
         if (kid._id === element.kid) {
           element.kid = kid;
@@ -236,7 +258,7 @@ export default class Main extends Component {
         }
       });
     });
-
+    console.log(this.state)
     return (
       <div>
         <Modal
@@ -367,41 +389,127 @@ export default class Main extends Component {
           </form>
         </Modal>
 
-        <div id="taskList-container" />
-
         <div id="taskList-container">
           {tasks.map((task, index) => {
             return (
-              <div key={index} id="listed-task">
-                <Col m={7} s={12}>
-                  <Card
-                    horizontal
-                    header={<CardTitle image={task.tutor.photo} />}>
-                    <h5>{task.description}</h5>
-                    <CardTitle image={task.kid.photo} />
-                  </Card>
-                </Col>
+              <div key={index}>
+                <Input
+                  name="status"
+                  type="checkbox"
+                  value="red"
+                  label="Done"
+                  checked={!task.status}
+                  onChange={e =>
+                    this.handlerStateCheckTask(task.status, task._id)
+                  }
+                />
+                <Modal
+                  header={task.description}
+                  fixedFooter
+                  trigger={
+                    <div key={index} id="listed-task">
+                      <Col m={7} s={12}>
+                        <Card
+                          horizontal
+                          header={<CardTitle image={task.tutor.photo} />}
+                        >
+                          <h5>{task.description}</h5>
+                          <CardTitle image={task.kid.photo} />
+                        </Card>
+                      </Col>
+                    </div>
+                  }
+                >
+                  <img src={task.tutor.photo} alt="" />
+                  <img src={task.kid.photo} alt="" />
+                  <p>{task.text}</p>
+                  <p>{task.date}</p>
+                  <p>{task.place}</p>
+                  <p>{task.type}</p>
+                </Modal>
               </div>
             );
           })}
         </div>
 
+        {/* REMINDERS */}
+
         <div id="reminderskList-container">
           {reminders.map((reminder, index) => {
             return (
-              <Modal
-                header={reminder.description}
-                fixedFooter
-                trigger={<div key={index} id="listed-reminder"><Col m={7} s={12}><Card horizontal header={<CardTitle image={reminder.kid.photo} />}>
-                    <h5>{reminder.description}</h5>
-                    <h6>{reminder.date}</h6>
-                  </Card>
-                </Col>
-              </div>}>
-                
-              </Modal>
+              <div key={index}>
+                <Modal
+                  header={reminder.description}
+                  fixedFooter
+                  trigger={
+                    <div key={index} id="listed-reminder">
+                      <Col m={7} s={12}>
+                        <Card
+                          horizontal
+                          header={<CardTitle image={reminder.kid.photo} />}
+                        >
+                          <h5>{reminder.description}</h5>
+                          <h6>{reminder.date}</h6>
+                        </Card>
+                      </Col>
+                    </div>
+                  }
+                >
+                  <img src={reminder.kid.photo} alt="" />
+                  <p>{reminder.description}</p>
+                  <p>{reminder.date}</p>
+                </Modal>
+              </div>
             );
           })}
+        </div>
+
+        {/* NOTICES */}
+
+        <div id="taskNotices-container">
+          {this.state.family.tasks
+            .filter(task => task.status === false)
+            .map((task, index) => {
+              return (
+                <div key={index}>
+                  <Modal
+                    header={task.description}
+                    fixedFooter
+                    trigger={
+                      <div key={index} id="listed-task">
+                        <Col m={7} s={12}>
+                          <Card
+                            horizontal
+                            header={<CardTitle image={task.tutor.photo} />}
+                          >
+                            <h5>{task.description}</h5>
+                            <CardTitle image={task.kid.photo} />
+                          </Card>
+                        </Col>
+                      </div>
+                    }
+                  >
+                    <img src={task.tutor.photo} alt="" />
+                    <img src={task.kid.photo} alt="" />
+                    <p>{task.text}</p>
+                    <p>{task.date}</p>
+                    <p>{task.place}</p>
+                    <p>{task.type}</p>
+                  </Modal>
+                </div>
+              );
+            })}
+        </div>
+
+        {/* PHOTOS */}
+
+        <div>
+          <Modal header="Modal Header" trigger={<Button>ADD PHOTO</Button>}>
+            <form action="" onChange={e => this.handlerNewPhoto(e)}>
+              <Input name="newphoto" type="file" label="File" s={12} onChange={e => this.handlerNewPhotoState(e)}/>
+              {this.state.photo===null?(<div></div>):(<Button className="modal-close" onChange={e => this.handlerSetPhoto(e)}>DONE!</Button>)}
+            </form>
+          </Modal>
         </div>
       </div>
     );

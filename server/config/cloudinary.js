@@ -19,6 +19,16 @@ var storage = cloudinaryStorage({
   }
 });
 
-const parser = multer({ storage: storage });
+var storagePhoto = cloudinaryStorage({
+  cloudinary: cloudinary,
+  folder: 'CanguroFamily', // The name of the folder in cloudinary
+  allowedFormats: ['jpg', 'png'],
+  filename: function (req, file, cb) {
+    cb(null, file.originalname); // The file on cloudinary would have the same name as the original file name
+  }
+});
+
+
+const parser = multer({ storage: storage , storagePhoto:storagePhoto});
 
 module.exports = parser;
