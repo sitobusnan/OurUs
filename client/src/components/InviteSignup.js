@@ -21,7 +21,6 @@ export default class InviteSignup extends Component {
     const token = this.props.match.params.token
     this.authService.invitedSignup({username, password, email, token})
     .then((user) => {
-      console.log(user)
       this.setState({username: '', password: '', email: '', family: '',redirect: true})
     });
   };

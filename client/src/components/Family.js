@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import Member from "./Member";
 import AuthService from "./Tools";
-import { Link } from "react-router-dom";
+import { Link, Redirect } from "react-router-dom";
 
 export default class Family extends Component {
   constructor(props) {
@@ -11,11 +11,20 @@ export default class Family extends Component {
       family: null,
       newMail: null,
       newRol: null,
-      newMemberState : false
+      newMemberState : false,
+      redirect: false
     };
 
     this.authService = new AuthService();
+    this.ifLoggedIn()
   }
+
+  ifLoggedIn = () => {
+    this.authService.loggedin().then(user => {
+      this.setState({...this.state, family: user.family});
+      
+    });
+  };
 
   componentDidMount() {
     this.setState({...this.state, family: this.props.user.family})
@@ -31,6 +40,7 @@ export default class Family extends Component {
       token = 'N'+token;
     }
     this.authService.mail(mail, token);
+    this.setState({redirect:true})
   };
 
   handleFormEdit = () =>{
@@ -48,6 +58,9 @@ export default class Family extends Component {
   };
 
   render() {
+    if(this.state && this.state.redirect) {
+      return <Redirect to="/" />
+    }
     const newMember = this.state.newMemberState ? <form action="submit" onSubmit={this.handleFormSubmit}>
     <input
       type="text"
@@ -62,7 +75,6 @@ export default class Family extends Component {
     </select>
     <input className="submitbutton" type="submit" />
   </form> : <div></div>
-    // console.log(this.state.family.tutors);
     if (this.state.family) {
       return (
         <div>

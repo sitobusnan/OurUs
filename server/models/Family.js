@@ -5,6 +5,8 @@ const familySchema = new Schema({
   name: String,
   tutors: [{ type : Schema.Types.ObjectId, ref: 'User' }],
   kids: [{ type : Schema.Types.ObjectId, ref: 'Kid' }],
+  tasks: [{ type : Schema.Types.ObjectId, ref: 'Task' }],
+  reminders: [{ type : Schema.Types.ObjectId, ref: 'Reminder' }],
   photos: [],
   token: String
 }, {

@@ -1,0 +1,20 @@
+@import url('https://fonts.googleapis.com/css?family=Leckerli+One');
+
+.Rectangle-14 {
+  width: 320px;
+  height: 50px;
+  border-radius: 10px;
+  box-shadow: 0 2px 4px 0 rgba(182, 182, 182, 0.5), 0 2px 7px 0 rgba(0, 0, 0, 0.17);
+  background-color: #ee4466;
+}
+
+.Rectangle-14-Copy {
+  
+  top: 534px;
+  left: 20px;
+  width: 320px;
+  height: 50px;
+  border-radius: 10px;
+  box-shadow: 0 2px 7px 0 rgba(0, 0, 0, 0.17);
+  background-color: #4a90e2;
+}

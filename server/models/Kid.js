@@ -3,6 +3,7 @@ const Schema   = mongoose.Schema;
 
 const kidSchema = new Schema({
   username: String,
+  type: String,
   family: String,
   photo: String,
   age: Number,

@@ -7,8 +7,9 @@ export default class Profile extends Component {
   constructor(props){
     super(props)
 
-    this.data = this.props.user.user
 
+    
+    this.data = this.props.user.user
     this.state = {
       username: this.data.username,
       family: this.data.family,

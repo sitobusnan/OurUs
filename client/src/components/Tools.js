@@ -53,14 +53,12 @@ class AuthService {
   }
 
   mail = (mail,token) => {
-    console.log(mail,token)
     return this.mailService.post('/sendMail',{mail:mail,token:token})
     .then(response => { 
       return response.data});
   }
 
   invitedSignup = (user) => {
-    console.log(user)
     // axios.post("http://localhost:5000/api/auth/signup", {user}, {withCredentials: true})
     return this.mailService.post('/confirm/:token', {user})
     .then((response) => {
@@ -68,8 +66,51 @@ class AuthService {
   }
 
   newKid = (kid) => {
-    console.log(kid)
     return this.elementsService.post('/newKid',{kid})
+    .then(response => { 
+      return response.data});
+  }
+
+  getKid = (kid) => {
+    return this.elementsService.post('/getKid',{kid})
+    .then(response => { 
+      return response.data});
+  }
+
+  addAlle = (Alle) => {
+    return this.elementsService.post('/addAlle',Alle)
+    .then(response => { 
+      return response.data});
+  }
+
+  addVac = (Vac) => {
+    return this.elementsService.post('/addVac',Vac)
+    .then(response => { 
+      return response.data});
+  }
+
+  addInt = (Int) => {
+    return this.elementsService.post('/addInt',Int)
+    .then(response => { 
+      return response.data});
+  }
+  
+  editkidimg = (kid) => {
+    const formData = new FormData();
+    Object.keys(kid).forEach(key => formData.append(key, kid[key]));
+    return this.elementsService.post('/editkidimg', formData)
+    .then(response => response.data);
+  }
+
+  newTask = (task) => {
+    return this.elementsService.post('/newTask',task)
+    .then(response => { 
+      return response.data});
+  }
+
+  newReminder = (reminder) => {
+    console.log("holita")
+    return this.elementsService.post('/newReminder',reminder)
     .then(response => { 
       return response.data});
   }

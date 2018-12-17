@@ -1,15 +1,20 @@
 import React, { Component } from "react";
 import "./App.css";
-import HomePage from "./components/HomePage";
+import HomePage from "./components/HomePage/HomePage";
 import Login from "./components/Login";
 import Signup from "./components/Signup";
 import Profile from "./components/Profile";
 import Family from "./components/Family";
 import Topbar from "./components/Topbar";
 import NewKid from "./components/NewKid";
+import Main from "./components/Main";
 import InviteSignup from "./components/InviteSignup";
 import { Redirect, Switch, Route } from "react-router-dom";
 import AuthService from "./components/Tools";
+import EditKid from "./components/EditKid";
+import Datetime from "react-datetime-picker"
+import Calendar from "react-calendar"
+
 
 class App extends Component {
   constructor() {
@@ -41,7 +46,7 @@ class App extends Component {
   ifLoggedIn = () => {
     this.authService.loggedin().then(user => {
       this.setState({...this.state, user: user.user, family: user.family});
-      console.log(this.state)
+      
     });
   };
 
@@ -69,6 +74,16 @@ class App extends Component {
             exact
             path="/newkid"
             render={() => <NewKid user={this.state} ifLoggedIn={this.ifLoggedIn} />}
+          />
+          <Route
+            exact
+            path="/editkid/:id"
+            render={(props) => <EditKid {...props}/>}
+          />
+          <Route
+            exact
+            path="/"
+            render={() => <Main user={this.state}/>}
           />
         </Switch>
         <button className="btn-logout" onClick={this.logout}>

@@ -4,6 +4,8 @@ const router = express.Router();
 const User = require("../models/User");
 const Family = require("../models/Family");
 const Kid = require("../models/Kid");
+const Task = require("../models/Task");
+const Reminder = require("../models/Reminder");
 const uploadCloud = require("../config/cloudinary");
 // Bcrypt to encrypt passwords
 const bcrypt = require("bcrypt");
@@ -24,6 +26,8 @@ router.post('/login', function(req, res, next) {
       Family.findOne({ name : req.user.family })
     .populate('tutors')
     .populate('kids')
+    .populate('tasks')
+    .populate('reminders')
     .then((family) => {
       return res.status(200).json({user:req.user,family:family});
     })
@@ -51,7 +55,7 @@ router.post("/signup", (req, res, next) => {
   const email = req.body.email;
   const family = req.body.family;
   const rol = 'Admin';
-  const photo = "noProfile"
+  const photo = "https://res.cloudinary.com/deosqppvg/image/upload/v1544999242/Canguro/no_user.png"
   
   
 
@@ -86,8 +90,14 @@ router.post("/signup", (req, res, next) => {
       name: family,
       token: token
     });
-    const newKid = Kid({
+    const newKid = new Kid({
       family: family
+    })
+    const newTask = new Task({
+      family_name: family
+    })
+    const newReminder = new Reminder({
+      family_name: family
     })
 
     newUser.save()
@@ -98,8 +108,14 @@ router.post("/signup", (req, res, next) => {
       .then((family)=>{
         newKid.save()
         .then(()=>{
-          res.status(200).json({message: "User Created"})
-        // res.status(200).json({user:user,family:family})
+          newTask.save()
+          .then(()=>{
+            newReminder.save()
+            .then(()=>{
+              res.status(200).json({message: "User Created"})
+              // res.status(200).json({user:user,family:family})
+            })
+          })
       })
     })
     .catch(err => {
@@ -129,6 +145,8 @@ router.get('/loggedin', (req, res) => {
     Family.findOne({ name : req.user.family })
     .populate('tutors')
     .populate('kids')
+    .populate('tasks')
+    .populate('reminders')
     .then((family) => {
       return res.status(200).json({user:req.user,family:family});
     })

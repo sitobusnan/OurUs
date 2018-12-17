@@ -33,7 +33,8 @@ function createDB(){
     kid:"SEED"
   });
   const newKid = new Kid({
-    name:"SEED"
+    name:"SEED",
+    type: "kid"
   });
   const newTask = new Task({
     kid:"SEED"

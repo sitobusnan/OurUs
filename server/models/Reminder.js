@@ -3,8 +3,11 @@ const Schema   = mongoose.Schema;
 
 const reminderSchema = new Schema({
   kid: String,
+  description: String,
   text: String,
-  date: Date
+  date: String,
+  family_name: String,
+  status: Boolean
 }, {
   timestamps: {
     createdAt: 'created_at',
