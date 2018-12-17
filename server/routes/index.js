@@ -5,7 +5,7 @@ const router  = express.Router();
 
 
 router.use('/api/auth' ,require('./auth'))
-router.use('/mail',require('./mail'))
-router.use('/elements',require('./elements'))
+router.use('/api/mail',require('./mail'))
+router.use('/api/elements',require('./elements'))
 
 module.exports = router;

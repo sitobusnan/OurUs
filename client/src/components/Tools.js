@@ -1,18 +1,19 @@
+
 import axios from "axios";
 
 
 class AuthService {
   constructor() {
     this.service = axios.create({
-      baseURL: "http://localhost:5000/api/auth",
+      baseURL:`${process.env.REACT_APP_API_URL}/auth`,
       withCredentials: true
     })
     this.mailService = axios.create({
-      baseURL: "http://localhost:5000/mail",
+      baseURL:`${process.env.REACT_APP_API_URL}/mail`,
       withCredentials: true
     })
     this.elementsService = axios.create({
-      baseURL: "http://localhost:5000/elements",
+      baseURL:`${process.env.REACT_APP_API_URL}/elements`,
       withCredentials: true
     })
   }

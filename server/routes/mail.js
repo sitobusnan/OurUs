@@ -1,3 +1,5 @@
+require('dotenv').config();
+
 const nodemailer = require('nodemailer');
 const express = require("express");
 const router = express.Router();
@@ -11,8 +13,8 @@ let userId = '';
 let transporter = nodemailer.createTransport({
   service: 'Gmail',
   auth: {
-    user: 'sito.ironhack@gmail.com',
-    pass: 'Ironhack.1' 
+    user: process.env.MAILUSER,
+    pass: process.env.MAILPASS 
   }
 });
 

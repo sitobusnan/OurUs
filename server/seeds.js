@@ -10,7 +10,7 @@ const Food = require("./models/Food");
 // const axios = require("axios");
 
 mongoose
-  .connect('mongodb://localhost/canguro', {useNewUrlParser: true})
+  .connect(process.env.DBURL, {useNewUrlParser: true})
   .then(x => {
     console.log(`Connected to Mongo! Database name: "${x.connections[0].name}"`)
     createDB();
