@@ -40,25 +40,30 @@ export default class Signup extends Component {
     }
     return (
       <div className="ironprofile">
-        <div className="imagen-portada-div">
-          <img className="imagen-portada" src="https://res.cloudinary.com/deosqppvg/image/upload/v1545132784/Canguro/Logo.png" alt=""/>
+        <div className="imagen-signup-div">
+          <img className="imagen-singnup" src="https://res.cloudinary.com/deosqppvg/image/upload/v1545132784/Canguro/Logo.png" alt=""/>
         </div>
+        <div className="form-signup">
         <form action="submit" onSubmit={this.handleFormSubmit}>
+          <label>USERNAME</label>
           <input
             type="text"
             name="username"
             id="name"
             onChange={e => this.handlerState(e)}/>
+            <label>PASSWORD</label>
           <input
             type="password"
             name="password"
             id="pass"
             onChange={e => this.handlerState(e)}/>
+            <label>MAIL</label>
             <input
             type="email"
             name="email"
             id="email"
             onChange={e => this.handlerState(e)}/>
+            <label>FAMILY NAME</label>
             <label htmlFor=""></label>
             <input
             type="text"
@@ -67,6 +72,7 @@ export default class Signup extends Component {
             onChange={e => this.handlerState(e)}/>
           <input className="submitbutton" type="submit" />
         </form>
+        </div>
       </div>
     );
   }

@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 import AuthService from "./../Tools";
 import {Redirect} from "react-router-dom";
+import "./InviteSignup.css";
 
 export default class InviteSignup extends Component {
   constructor(props) {

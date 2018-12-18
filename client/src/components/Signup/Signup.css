@@ -50,3 +50,61 @@ table {
 	border-spacing: 0;
 }
 
+.ironprofile{
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-content: center;
+}
+
+.imagen-signup-div{
+  display: flex;
+  justify-content: center;
+  align-content: center;
+  
+}
+.imagen-signup{
+  margin-top: 20%;
+  height: 20%;
+  width: 40%;
+}
+
+label {
+  font-family: Nunito;
+  font-size: 16px;
+  font-weight: normal;
+  font-style: normal;
+  font-stretch: normal;
+  line-height: normal;
+  letter-spacing: normal;
+  color: #521823;
+}
+
+.form-signup{
+  margin: 0 auto;
+  margin-top: 28%;
+  width: 80%;
+}
+
+input{
+  width: 80%;
+}
+
+.submitbutton{
+  color: #ffffff;
+  font-family: Nunito;
+  font-size: 20px;
+  font-weight: bold;
+  font-style: normal;
+  font-stretch: normal;
+  line-height: normal;
+  letter-spacing: normal;
+  margin-top: 14%;
+  margin-left: -3%;
+  width: 320px;
+  height: 50px;
+  border-radius: 10px;
+  box-shadow: 0 2px 7px 0 rgba(0, 0, 0, 0.17);
+  background-color: #4a90e2;
+}
+
