@@ -1,6 +1,6 @@
 import React, { Component } from "react";
-import Member from "./Member";
-import AuthService from "./Tools";
+import Member from "../Member/Member";
+import AuthService from "./../Tools";
 import { Link, Redirect } from "react-router-dom";
 
 export default class Family extends Component {

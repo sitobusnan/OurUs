@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import noProfile from '../no_user.png'
+import noProfile from '../../no_user.png'
 import {Link} from "react-router-dom";
 export default class Member extends Component {
   constructor(props){

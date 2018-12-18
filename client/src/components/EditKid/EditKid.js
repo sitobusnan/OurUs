@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
-import AuthService from './Tools'
-import noProfile from '../no_user.png'
+import AuthService from './../Tools'
+import noProfile from '../../no_user.png'
 import { Redirect } from "react-router-dom";
 
 export default class EditKid extends Component {

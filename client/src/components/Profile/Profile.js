@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
-import AuthService from './Tools'
+import AuthService from './../Tools'
 import {Redirect} from "react-router-dom";
-import noProfile from '../no_user.png'
+import noProfile from '../../no_user.png'
 
 export default class Profile extends Component {
   constructor(props){

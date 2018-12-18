@@ -1,17 +1,17 @@
 import React, { Component } from "react";
 import "./App.css";
 import HomePage from "./components/HomePage/HomePage";
-import Login from "./components/Login";
-import Signup from "./components/Signup";
-import Profile from "./components/Profile";
-import Family from "./components/Family";
-import Topbar from "./components/Topbar";
-import NewKid from "./components/NewKid";
-import Main from "./components/Main";
-import InviteSignup from "./components/InviteSignup";
+import Login from "./components/Login/Login";
+import Signup from "./components/Signup/Signup";
+import Profile from "./components/Profile/Profile";
+import Family from "./components/Family/Family";
+import Topbar from "./components/Topbar/Topbar";
+import NewKid from "./components/NewKid/NewKid";
+import Main from "./components/Main/Main";
+import InviteSignup from "./components/InviteSignup/InviteSignup";
 import { Redirect, Switch, Route } from "react-router-dom";
 import AuthService from "./components/Tools";
-import EditKid from "./components/EditKid";
+import EditKid from "./components/EditKid/EditKid";
 
 
 class App extends Component {

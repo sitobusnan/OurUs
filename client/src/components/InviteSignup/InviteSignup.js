@@ -1,45 +1,45 @@
-import React, { Component } from "react";
-import AuthService from "./Tools";
+import React, { Component } from 'react'
+import AuthService from "./../Tools";
 import {Redirect} from "react-router-dom";
 
-export default class Signup extends Component {
+export default class InviteSignup extends Component {
   constructor(props) {
     super(props);
     this.state = {
     username: '',
     password: '',
-    family: '',
+    email: '',
     redirect: false
     };
     this.authService = new AuthService();
-    this.user = {};
-
   }
 
   handleFormSubmit = event => {
     event.preventDefault();
-    const {username, password, email, family} = this.state;
-    this.authService.signup({username, password, email, family})
+    const {username, password, email} = this.state;
+    const token = this.props.match.params.token
+    this.authService.invitedSignup({username, password, email, token})
     .then((user) => {
-      this.props.getUser(user)
       this.setState({username: '', password: '', email: '', family: '',redirect: true})
     });
   };
 
   handlerState = e => {
-    
     const { name, value } = e.target;
     this.setState({ [name]: value });
-    
   };
 
   render() {
-    if(this.state && this.state.redirect) {
+
+    
+    if(this.state.redirect) {
       return <Redirect to="/"/>
     }
+
     return (
       <div className="ironprofile">
-      <h1>Signup</h1>
+      <p>tu token es {this.props.match.params.token}</p>
+      <h1>INVITED SIGNUP</h1>
         <form action="submit" onSubmit={this.handleFormSubmit}>
           <input
             type="text"
@@ -57,14 +57,9 @@ export default class Signup extends Component {
             id="email"
             onChange={e => this.handlerState(e)}/>
             <label htmlFor=""></label>
-            <input
-            type="text"
-            name="family"
-            id="family"
-            onChange={e => this.handlerState(e)}/>
           <input className="submitbutton" type="submit" />
         </form>
       </div>
-    );
+    )
   }
 }

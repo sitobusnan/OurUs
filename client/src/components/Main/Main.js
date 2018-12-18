@@ -1,6 +1,15 @@
 import React, { Component } from "react";
-import { Button, Modal, Input, Col, Card, CardTitle } from "react-materialize";
-import AuthService from "./Tools";
+import {
+  Button,
+  Modal,
+  Input,
+  Col,
+  Card,
+  CardTitle,
+  Carousel,
+  MediaBox
+} from "react-materialize";
+import AuthService from "../Tools";
 
 export default class Main extends Component {
   constructor(props) {
@@ -28,7 +37,7 @@ export default class Main extends Component {
         date: null,
         family_name: this.props.user.family.name
       },
-      photo:null
+      photo: null
     };
     this.authService = new AuthService();
     this.today = new Date();
@@ -199,22 +208,21 @@ export default class Main extends Component {
       });
   };
 
-  handlerNewPhotoState = (e) => {
-      this.setState({...this.state, photo: e.target.files[0]})
-  }
+  handlerNewPhotoState = e => {
+    this.setState({ ...this.state, photo: e.target.files[0] });
+  };
 
-  handlerSetPhoto = (e) => {
-    this.setState({...this.state, photo: null})
+  handlerSetPhoto = e => {
+    this.setState({ ...this.state, photo: null });
     this.ifLoggedIn();
-  }
+  };
 
-  handlerNewPhoto = e =>{
+  handlerNewPhoto = e => {
     e.preventDefault();
-    const photo = e.target.files[0]
-    this.authService.newPhoto({photo:photo,family:this.state.family._id})
-    .then((family) => {
-      
-    });
+    const photo = e.target.files[0];
+    this.authService
+      .newPhoto({ photo: photo, family: this.state.family._id })
+      .then(family => {});
   };
 
   render() {
@@ -258,7 +266,11 @@ export default class Main extends Component {
         }
       });
     });
-    console.log(this.state)
+
+    // IMAGES TO DISPLAY
+
+    
+    
     return (
       <div>
         <Modal
@@ -468,7 +480,7 @@ export default class Main extends Component {
 
         <div id="taskNotices-container">
           {this.state.family.tasks
-            .filter(task => task.status === false)
+            .filter(task => task.status === false && task.date === this.today)
             .map((task, index) => {
               return (
                 <div key={index}>
@@ -504,10 +516,33 @@ export default class Main extends Component {
         {/* PHOTOS */}
 
         <div>
+          <Carousel
+            images={this.state.family.photos.map((element,index)=>{
+              return <div key={index}><MediaBox src={element}  width="350"/></div>
+            })}
+          />
+        </div>
+
+        <div>
           <Modal header="Modal Header" trigger={<Button>ADD PHOTO</Button>}>
             <form action="" onChange={e => this.handlerNewPhoto(e)}>
-              <Input name="newphoto" type="file" label="File" s={12} onChange={e => this.handlerNewPhotoState(e)}/>
-              {this.state.photo===null?(<div></div>):(<Button className="modal-close" onChange={e => this.handlerSetPhoto(e)}>DONE!</Button>)}
+              <Input
+                name="newphoto"
+                type="file"
+                label="File"
+                s={12}
+                onChange={e => this.handlerNewPhotoState(e)}
+              />
+              {this.state.photo === null ? (
+                <div />
+              ) : (
+                <Button
+                  className="modal-close"
+                  onChange={e => this.handlerSetPhoto(e)}
+                >
+                  DONE!
+                </Button>
+              )}
             </form>
           </Modal>
         </div>

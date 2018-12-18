@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import AuthService from './Tools';
+import AuthService from './../Tools';
 import {Redirect} from "react-router-dom";
 
 
