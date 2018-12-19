@@ -77,7 +77,8 @@ router.post("/signup", (req, res, next) => {
     });
     const newFamily = new Family({
       name: family,
-      token: token
+      token: token,
+      photos:['https://res.cloudinary.com/deosqppvg/image/upload/v1545247036/Canguro/camara.png']
     });
     const newKid = new Kid({
       family: family
