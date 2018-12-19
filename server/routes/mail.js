@@ -7,7 +7,6 @@ const User = require("../models/User");
 const Family = require("../models/Family");
 const bcrypt = require("bcrypt");
 const bcryptSalt = 10;
-let userId = '';
 
 
 let transporter = nodemailer.createTransport({
@@ -21,7 +20,6 @@ let transporter = nodemailer.createTransport({
 router.post("/sendMail", (req, res) => {
   email =req.body.mail;
   token = req.body.token;
-  // res.status(200).json({message: "TPM"})
   transporter.sendMail({
     from: '"Sito Porno Star 👻" <sito.ironhack@gmail.com>',
     to: email, 
@@ -272,7 +270,7 @@ router.post("/sendMail", (req, res) => {
       </body>
     </html>
    `
-    // html: `<b>http://localhost:3000/auth/confirm/${token}</b>`
+
   })
   .then(()=>console.log('todo bien'))
   .catch(error => console.log(error));

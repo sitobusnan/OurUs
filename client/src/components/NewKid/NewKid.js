@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import AuthService from './../Tools';
 import {Redirect} from "react-router-dom";
+import "./NewKid.css";
 
 
 export default class NewKid extends Component {
@@ -39,20 +40,21 @@ export default class NewKid extends Component {
     }
     return (
       <div className="ironprofile">
-      <h1>Add new Kid</h1>
-        <form action="submit" onSubmit={this.handleFormSubmit}>
+      <h1>ADD NEW KID</h1>
+        <form className="form-newkid" action="submit" onSubmit={this.handleFormSubmit}>
+        <label htmlFor="">NAME</label>
           <input
             type="text"
             name="name"
             id="name"
             onChange={e => this.handlerState(e)}/>
-          
+          <label htmlFor="">AGE</label>
             <input
             type="number"
             name="age"
             id="age"
             onChange={e => this.handlerState(e)}/>
-          <input className="submitbutton" type="submit" />
+          <input className="submitbutton-newkid" type="submit" />
         </form>
       </div>
     )

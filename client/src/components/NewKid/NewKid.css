@@ -1,12 +1,11 @@
 @import url('https://fonts.googleapis.com/css?family=Leckerli+One');
 @import url('https://fonts.googleapis.com/css?family=Nunito');
 
-
-
-
-.portada{
+.ironprofile{
   display: flex;
   flex-direction: column;
+  justify-content: center;
+  align-content: center;
   font-family: Nunito;
   font-size: 20px;
   font-weight: bold;
@@ -14,35 +13,43 @@
   font-stretch: normal;
   line-height: normal;
   letter-spacing: normal;
+}
+
+.form-newkid{
+  margin: 0 auto;
+  margin-top: 40%;
+  width: 80%;
+}
+
+label {
+  font-family: Nunito;
+  font-size: 16px;
+  font-weight: normal;
+  font-style: normal;
+  font-stretch: normal;
+  line-height: normal;
+  letter-spacing: normal;
+  color: #521823;
+}
+
+input{
+  margin-top: 3%;
+}
+
+.submitbutton-newkid{
+  color: #ffffff;
   text-align: center;
-  color: #ffffff;
-}
-
-.imagen-portada{
-  margin-top: 60%;
-  width: 60%;
   
-}
-
-.botonera{
-  margin-top: 45%;
-}
-
-.Rectangle-14 {
-  color: #ffffff;
-  width: 320px;
-  height: 50px;
-  border-radius: 10px;
-  box-shadow: 0 2px 4px 0 rgba(182, 182, 182, 0.5), 0 2px 7px 0 rgba(0, 0, 0, 0.17);
-  background-color: #ee4466;
-}
-
-.Rectangle-14-Copy {
-  color: #ffffff;
-  margin-top: 5%;
+  margin-top: 55%;
+  margin-left: -3%;
   width: 320px;
   height: 50px;
   border-radius: 10px;
   box-shadow: 0 2px 7px 0 rgba(0, 0, 0, 0.17);
   background-color: #4a90e2;
+}
+
+h1{
+  margin: 0 auto;
+  margin-top: 20%;
 }

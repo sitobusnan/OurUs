@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import Member from "../Member/Member";
 import AuthService from "./../Tools";
 import { Link, Redirect } from "react-router-dom";
+import "./Family.css";
 
 export default class Family extends Component {
   constructor(props) {
@@ -9,8 +10,6 @@ export default class Family extends Component {
     
     this.state = {
       family: null,
-      newMail: null,
-      newRol: null,
       newMemberState : false,
       redirect: false
     };
@@ -30,63 +29,38 @@ export default class Family extends Component {
     this.setState({...this.state, family: this.props.user.family})
   }
 
-  handleFormSubmit = event => {
-    event.preventDefault();
-    const mail = this.state.newmail;
-    let token = this.state.family.token;
-    if(this.state.newRol === 'Admin'){
-      token = 'A'+token;
-    }else{
-      token = 'N'+token;
-    }
-    this.authService.mail(mail, token);
-    this.setState({redirect:true})
-  };
+  
 
   handleFormEdit = () =>{
     let change = !this.state.newMemberState;
     this.setState({newMemberState:change})
   }
 
-  handlerStateMail = e => {
-    const newmail = e.target.value;
-    this.setState({ newmail: newmail });
-  };
-  handlerStateRol = e => {
-    const newrol = e.target.value;
-    this.setState({ newrol: newrol });
-  };
+  
+  
 
   render() {
     if(this.state && this.state.redirect) {
       return <Redirect to="/" />
     }
-    const newMember = this.state.newMemberState ? <form action="submit" onSubmit={this.handleFormSubmit}>
-    <input
-      type="text"
-      name="family"
-      id="family"
-      onChange={e => this.handlerStateMail(e)}
-    />
-    <label htmlFor="">Rol?</label>
-    <select id="rol" name="rol" defaultValue="Select Rol" onChange={e => this.handlerStateRol(e)}>
-      <option value="Admin">Admin</option>
-      <option value="Nany">Nany</option>
-    </select>
-    <input className="submitbutton" type="submit" />
-  </form> : <div></div>
+    
     if (this.state.family) {
       return (
-        <div>
+        <div className="family">
+          <div className="tutors-div">
+            <h1>TUTORS</h1>
           {this.state.family.tutors.map((element, index) => {
             return <Member key={index} elem={element} />;
           })}
-          <input className="submitbutton" type="button" value="ADD MEMBER" onClick={this.handleFormEdit}/>
-          {newMember}
+          <Link to='/newmember' family={this.state.family}><button className="btn-family" type="button">ADD MEMBER</button></Link>
+          </div>
+          <div className="kids-div">
+            <h1>KIDS</h1>
           {this.state.family.kids.map((element, index) => {
             return <Member key={index} elem={element} />;
           })}
-          <Link to='/newkid'><button type="button">ADD KID</button></Link>
+          <Link to='/newkid'><button className="btn-family" type="button">ADD KID</button></Link>
+          </div>
         </div>
       );
     } else {

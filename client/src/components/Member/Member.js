@@ -1,32 +1,38 @@
-import React, { Component } from 'react'
-import noProfile from '../../no_user.png'
-import {Link} from "react-router-dom";
-export default class Member extends Component {
-  constructor(props){
-    super(props)
+import React, { Component } from "react";
+import { Link } from "react-router-dom";
+import "./Member.css";
 
-    this.state = null
+export default class Member extends Component {
+  constructor(props) {
+    super(props);
+
+    this.state = null;
   }
 
   render() {
-    const photo = this.props.elem.photo==="noProfile" ? (<div className="img-edit"><img className="img-profile" src={noProfile} alt=""/></div>) : (<div className="img-edit"><img className="img-profile" src={this.props.elem.photo} alt=""/></div>);
-    const member = this.props.elem.type? (
-      
-      <div>
-      {photo}
-      <h1>{this.props.elem.username}</h1>
-      <Link to={`/editkid/${this.props.elem._id}`} ><button type="button" >EDTI KID</button></Link>
-    </div>):(<div>
-      {photo}
-      <h1>{this.props.elem.username}</h1>
-      
-    </div>)
-    
-    return (
-      <div>
-        {member}
+    const member = this.props.elem.type ? (
+      <div className="member-kid-div">
+        <div className="member-div">
+          <div className="img-edit">
+            <img className="img-profile" src={this.props.elem.photo} alt="" />
+          </div>
+          <h1>{this.props.elem.username}</h1>
+        </div>
+        <Link to={`/editkid/${this.props.elem._id}`}>
+          <button className="btn-kid" type="button">
+            EDTI KID
+          </button>
+        </Link>
       </div>
-      
-    )
+    ) : (
+      <div className="member-div">
+        <div className="img-edit">
+          <img className="img-profile" src={this.props.elem.photo} alt="" />
+        </div>
+        <h1>{this.props.elem.username}</h1>
+      </div>
+    );
+
+    return <div>{member}</div>;
   }
 }

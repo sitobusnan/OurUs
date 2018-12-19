@@ -1,12 +1,7 @@
 @import url('https://fonts.googleapis.com/css?family=Leckerli+One');
 @import url('https://fonts.googleapis.com/css?family=Nunito');
 
-
-
-
-.portada{
-  display: flex;
-  flex-direction: column;
+.family{
   font-family: Nunito;
   font-size: 20px;
   font-weight: bold;
@@ -14,35 +9,31 @@
   font-stretch: normal;
   line-height: normal;
   letter-spacing: normal;
-  text-align: center;
+}
+
+.family h1{
+  margin: 3.1rem 0 0.68rem 0;
+}
+
+.btn-family{
   color: #ffffff;
-}
-
-.imagen-portada{
-  margin-top: 60%;
-  width: 60%;
-  
-}
-
-.botonera{
-  margin-top: 45%;
-}
-
-.Rectangle-14 {
-  color: #ffffff;
-  width: 320px;
-  height: 50px;
-  border-radius: 10px;
-  box-shadow: 0 2px 4px 0 rgba(182, 182, 182, 0.5), 0 2px 7px 0 rgba(0, 0, 0, 0.17);
-  background-color: #ee4466;
-}
-
-.Rectangle-14-Copy {
-  color: #ffffff;
-  margin-top: 5%;
+  margin: 0 auto;
+  margin-top: 8%;
   width: 320px;
   height: 50px;
   border-radius: 10px;
   box-shadow: 0 2px 7px 0 rgba(0, 0, 0, 0.17);
   background-color: #4a90e2;
+}
+
+.kids-div{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.tutors-div{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }

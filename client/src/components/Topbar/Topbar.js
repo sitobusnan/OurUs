@@ -13,7 +13,7 @@ export default class Topbar extends Component {
         <Link to='/family'><button type="button" >FAMILY</button></Link>
         </div>
         <div>
-        <Link to='/'><button type="button" >PANEL</button></Link>
+        <Link to='/main'><button type="button" >PANEL</button></Link>
         </div>
       </div>
     )

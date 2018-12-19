@@ -2,6 +2,7 @@ import React, { Component } from 'react'
 import AuthService from './../Tools'
 import {Redirect} from "react-router-dom";
 import noProfile from '../../no_user.png'
+import "./Profile.css";
 
 export default class Profile extends Component {
   constructor(props){
@@ -25,6 +26,13 @@ export default class Profile extends Component {
     this.authService = new AuthService();
     
   }
+
+  logout = () => {
+    this.authService
+      .logout()
+      .then(() => this.setState({ ...this.state, user: null, family: null, redirect: true }));
+      
+  };
 
   handleFormEdit = () =>{
     let change = !this.state.edit;
@@ -65,34 +73,36 @@ export default class Profile extends Component {
     
       const editname = this.state.edit ? (<input type="text" name="username" value={this.state.username} onChange={(e)=>this.handlerState(e)}/>) : (<div></div>);
       const email = this.state.edit ? (<input type="text" name="email" value={this.state.email} onChange={(e)=>this.handlerState(e)}/>) : (<div></div>);
-      const confirm = this.state.edit ? (<input className="submitbutton" type="submit" />) : (<div></div>);
-      const user_img = this.state.photo==="noProfile" ? (<div className="img-edit"><img className="img-profile" src={noProfile} alt=""/></div>) : (<div className="img-edit"><img className="img-profile" src={this.data.photo} alt=""/></div>);
+      const confirm = this.state.edit ? (<input className="submitbutton-profile" type="submit" />) : (<div></div>);
       const edit_img = this.state.edit ? (<input type="file" name="photo" onChange={e => this.handlerState(e)} />) : (<div></div>);
       
     if(this.state.redirect) {
-      return <Redirect to="/" />
+      return <Redirect to="/main" />
     }
     return (
-      <div>
-        <form action="" onSubmit={this.handleFormSubmitImage}>
-        {user_img}
-        {edit_img}
-        {confirm}
+      <div className="ironprofile">
+        <form className="profile-user" action="" onSubmit={this.handleFormSubmitImage}>
+          <div className="img-edit-profile"><img className="img-profile" src={this.data.photo} alt="" /></div>
+          {edit_img}
+          {confirm}
         </form>
-        <form action="" onSubmit={this.handleFormSubmit}>
-        <label htmlFor="">USERNAME</label>
-        <h2>{this.data.username}</h2>
-        {editname}
-        <label htmlFor="">FAMILY</label>
-        <h2>{this.data.family}</h2>
-        <label htmlFor="">ROL</label>
-        <h2>{this.data.rol}</h2>
-        <label htmlFor="">EMAIL</label>
-        <h2>{this.data.email}</h2>
-        {email}
-        <input className="submitbutton" type="button" value="EDIT" onClick={this.handleFormEdit}/>
-        {confirm}
+        <form  className="profile-form" action="" onSubmit={this.handleFormSubmit}>
+          <label htmlFor="">USERNAME</label>
+          <h2>{this.data.username}</h2>
+          {editname}
+          <label htmlFor="">FAMILY</label>
+          <h2>{this.data.family}</h2>
+          <label htmlFor="">ROL</label>
+          <h2>{this.data.rol}</h2>
+          <label htmlFor="">EMAIL</label>
+          <h2>{this.data.email}</h2>
+          {email}
+          {confirm}
+          <input className="submitbutton-profile" type="button" value="EDIT" onClick={this.handleFormEdit} />
         </form>
+        <button className="btn-logout" onClick={this.logout}>
+          LOGOUT
+        </button>
       </div>
     )
   }

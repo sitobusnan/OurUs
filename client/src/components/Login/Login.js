@@ -8,7 +8,7 @@ export default class Login extends Component {
     super()
 
     this.state = {
-      
+        user : null,
         username: '',
         password: '',
         redirect: false
@@ -22,8 +22,8 @@ export default class Login extends Component {
     const {username, password} = this.state;
     this.authService.login({username, password})
     .then((user) => {
+      this.setState({username:'', password: '',user:user.user,redirect: true})
       this.props.getUser(user)
-      this.setState({username: '', password: '',redirect: true})
     });
   };
 
@@ -34,8 +34,10 @@ export default class Login extends Component {
   }
 
   render() {
-    if(this.state && this.state.redirect) {
-      return <Redirect to="/" />
+    console.log(this.state.user)
+    if(this.state.redirect) {
+      console.log("TPM")
+      return <Redirect to="/main" />
     }
     return (
       <div className="ironprofile">
@@ -49,7 +51,7 @@ export default class Login extends Component {
           <label>PASSWORD</label>
           <input type="text" name="password" id="" placeholder="Password" onChange={(e)=>this.handlerState(e)}/>
           <div className="login-button">
-          <input className="submitbutton" type="submit" />
+          <input className="submitbutton-login" type="submit" />
           </div>
         </form>
         </div>

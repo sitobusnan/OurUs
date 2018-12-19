@@ -1,0 +1,56 @@
+@import url('https://fonts.googleapis.com/css?family=Leckerli+One');
+@import url('https://fonts.googleapis.com/css?family=Nunito');
+
+.img-profile{
+    height: 100%;
+    width: 100%;
+    border-radius:50%;
+}
+
+.member-div{
+  font-family: Nunito;
+  display: flex;
+  justify-content: space-around;
+  margin: 0 auto;
+  margin-top: 5%;
+  padding: 5%;
+  width: 90%;
+  height: 7rem;
+  box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.38), 0 2px 7px 0 rgba(0, 0, 0, 0.17);
+}
+
+h1{
+  font-size: 2rem;
+  line-height: 0%;
+  margin: 3.1rem 0 2.68rem 0;
+}
+
+.img-edit{
+  width: 25%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.btn-kid{
+  color: #ffffff;
+  font-family: Nunito;
+  font-size: 20px;
+  font-weight: bold;
+  font-style: normal;
+  font-stretch: normal;
+  line-height: normal;
+  letter-spacing: normal;
+  margin-top:1%;
+  width: 320px;
+  height: 30px;
+  border-radius: 10px;
+  box-shadow: 0 2px 7px 0 rgba(0, 0, 0, 0.17);
+  background-color: #4a90e2;
+}
+
+.member-kid-div{
+  display: flex;
+  flex-direction: column;
+  margin: 0 auto;
+  align-items: center
+}

@@ -32,17 +32,6 @@ router.post('/login', function(req, res, next) {
       return res.status(200).json({user:req.user,family:family});
     })
     .catch((err) => {res.status(403).json({ message: "Something went wrong looking for your family", err })})
-
-
-
-
-
-
-      // Family.findOne({ name : user.family }, (err, family) => {
-      //   console.log(family)
-      //   if(family===null){res.status(403).json({ message: "Something went wrong looking for your family" });}
-      //   return res.status(200).json({user:user,family:family});
-      // })
     });
   })(req, res, next);
 });
@@ -113,7 +102,6 @@ router.post("/signup", (req, res, next) => {
             newReminder.save()
             .then(()=>{
               res.status(200).json({message: "User Created"})
-              // res.status(200).json({user:user,family:family})
             })
           })
       })

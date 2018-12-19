@@ -39,27 +39,34 @@ export default class InviteSignup extends Component {
 
     return (
       <div className="ironprofile">
-      <p>tu token es {this.props.match.params.token}</p>
-      <h1>INVITED SIGNUP</h1>
+        <div className="imagen-invite-div">
+          <img className="imagen-invite" src="https://res.cloudinary.com/deosqppvg/image/upload/v1545132784/Canguro/Logo.png" alt=""/>
+        </div>
+        <div className="form-invite">
         <form action="submit" onSubmit={this.handleFormSubmit}>
+        
+        <label>USERNAME</label>
           <input
             type="text"
             name="username"
             id="name"
             onChange={e => this.handlerState(e)}/>
+            <label>PASSWORD</label>
           <input
             type="password"
             name="password"
             id="pass"
             onChange={e => this.handlerState(e)}/>
+            <label>EMAIL</label>
             <input
             type="email"
             name="email"
             id="email"
             onChange={e => this.handlerState(e)}/>
             <label htmlFor=""></label>
-          <input className="submitbutton" type="submit" />
+          <input className="submitbutton-invite" type="submit" />
         </form>
+        </div>
       </div>
     )
   }

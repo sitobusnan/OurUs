@@ -19,14 +19,12 @@ class AuthService {
   }
 
   signup = (user) => {
-    // axios.post("http://localhost:5000/api/auth/signup", {user}, {withCredentials: true})
     return this.service.post('/signup', user)
     .then((response) => {
       return response.data})
   }
 
   login = (user) => {
-    // axios.post("http://localhost:5000/api/auth/login", {user}, {withCredentials: true})
     return this.service.post('/login', user)
     .then(response => response.data)
   }
@@ -60,7 +58,6 @@ class AuthService {
   }
 
   invitedSignup = (user) => {
-    // axios.post("http://localhost:5000/api/auth/signup", {user}, {withCredentials: true})
     return this.mailService.post('/confirm/:token', {user})
     .then((response) => {
       return response.data})

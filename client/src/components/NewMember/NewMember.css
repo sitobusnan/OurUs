@@ -1,25 +1,17 @@
 @import url('https://fonts.googleapis.com/css?family=Leckerli+One');
 @import url('https://fonts.googleapis.com/css?family=Nunito');
 
-
 .ironprofile{
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-content: center;
-  font-family: Nunito;
 }
 
-.imagen-invite-div{
-  display: flex;
-  justify-content: center;
-  align-content: center;
-}
-
-.imagen-invite{
-  margin-top: 20%;
-  height: 20%;
-  width: 40%;
+.form-newmember{
+  margin: 0 auto;
+  margin-top: 60%;
+  width: 80%;
 }
 
 label {
@@ -33,18 +25,14 @@ label {
   color: #521823;
 }
 
-.form-invite{
-  margin: 0 auto;
-  margin-top: 40%;
-  width: 80%;
+input{
+  margin-top: 3%;
 }
 
-.login-button{
-  margin-top: 40%;
-}
-
-.submitbutton-invite{
+.submitbutton-newmember{
   color: #ffffff;
+  text-align: center;
+  
   font-family: Nunito;
   font-size: 20px;
   font-weight: bold;
@@ -52,11 +40,11 @@ label {
   font-stretch: normal;
   line-height: normal;
   letter-spacing: normal;
-  margin-top: 20%;
+  margin-top: 25%;
   margin-left: -3%;
   width: 320px;
   height: 50px;
   border-radius: 10px;
   box-shadow: 0 2px 7px 0 rgba(0, 0, 0, 0.17);
-  background-color: #ee4466;
+  background-color: #4a90e2;
 }

@@ -12,6 +12,7 @@ import InviteSignup from "./components/InviteSignup/InviteSignup";
 import { Redirect, Switch, Route } from "react-router-dom";
 import AuthService from "./components/Tools";
 import EditKid from "./components/EditKid/EditKid";
+import NewMember from "./components/NewMember/NewMember";
 
 
 class App extends Component {
@@ -80,13 +81,15 @@ class App extends Component {
           />
           <Route
             exact
-            path="/"
+            path="/main"
             render={() => <Main user={this.state}/>}
           />
+          <Route
+            exact
+            path="/newmember"
+            render={() => <NewMember user={this.state}/>}
+          />
         </Switch>
-        <button className="btn-logout" onClick={this.logout}>
-          Logout
-        </button>
       </div>
     ) : (
       <div>
