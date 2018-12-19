@@ -1,7 +1,6 @@
 import React, { Component } from 'react'
 import AuthService from './../Tools'
 import {Redirect} from "react-router-dom";
-import noProfile from '../../no_user.png'
 import "./Profile.css";
 
 export default class Profile extends Component {
