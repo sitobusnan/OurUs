@@ -215,7 +215,7 @@ router.post("/sendMail", (req, res) => {
       <table align="center" border="0" cellpadding="0" cellspacing="0" role="presentation" style="border-collapse:separate;line-height:100%;">
         <tr>
           <td align="center" bgcolor="#dbdbdb" role="presentation" style="border:none;border-radius:3px;cursor:auto;padding:10px 25px;" valign="middle">
-            <a href="http://localhost:3000/mail/confirm/${token}" style="background: #dbdbdb; font-family: Arial, sans-serif; font-size: 16px; font-weight: bold; line-height: 120%; Margin: 0; text-transform: none; text-decoration: none; color: inherit;" target="_blank">
+            <a href="https://ourus.herokuapp.com/mail/confirm/${token}" style="background: #dbdbdb; font-family: Arial, sans-serif; font-size: 16px; font-weight: bold; line-height: 120%; Margin: 0; text-transform: none; text-decoration: none; color: inherit;" target="_blank">
               ESQUILAME JODERRR!!!
             </a>
           </td>

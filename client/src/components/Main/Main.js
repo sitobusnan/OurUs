@@ -291,7 +291,7 @@ export default class Main extends Component {
 
 
         {/* //KIDS */}
-
+            <h2>KIDS</h2>
         <div className="sec-kids">
             {this.state.family.kids.map((element)=>{
               return (
@@ -307,7 +307,7 @@ export default class Main extends Component {
         
         {/* // TODO */}
 
-
+          <h2>TODO LIST</h2>
         <div className="taskList-container">
           {tasks.map((task, index) => {
             return (
@@ -338,12 +338,20 @@ export default class Main extends Component {
                     </div>
                   }
                 >
-                  <img src={task.tutor.photo} alt="" />
-                  <img src={task.kid.photo} alt="" />
-                  <p>{task.text}</p>
-                  <p>{task.date}</p>
-                  <p>{task.place}</p>
-                  <p>{task.type}</p>
+                  <div className="task-modal">
+                    <div className="task-modal-images">
+                      <img className="task-modal-image" src={task.tutor.photo} alt="" />
+                      <img className="task-modal-image" src={task.kid.photo} alt="" />
+                    </div>
+                    <label htmlFor="">TEXT</label>
+                    <p>{task.text}</p>
+                    <label htmlFor="">DATE</label>
+                    <p>{task.date}</p>
+                    <label htmlFor="">PLACE</label>
+                    <p>{task.place}</p>
+                    <label htmlFor="">TASK TYPE</label>
+                    <p>{task.type}</p>
+                  </div>
                 </Modal>
               </div>
             );
@@ -351,7 +359,7 @@ export default class Main extends Component {
         </div>
 
         {/* REMINDERS */}
-
+        <h2>REMINDERS</h2>
         <div className="remindersList-container">
           {reminders.map((reminder, index) => {
             return (
@@ -371,9 +379,16 @@ export default class Main extends Component {
                     </div>
                   }
                 >
-                  <img src={reminder.kid.photo} alt="" />
-                  <p>{reminder.description}</p>
-                  <p>{reminder.date}</p>
+                  <div className="task-modal">
+                    <div className="task-modal-images">
+                      <img className="task-modal-image" src={reminder.kid.photo} alt="" />
+                    </div>
+                    <label htmlFor="">TEXT</label>
+                    <p>{reminder.text}</p>
+                    <label htmlFor="">DATE</label>
+                    <p>{reminder.date}</p>
+                    
+                  </div>
                 </Modal>
               
             );
@@ -381,13 +396,13 @@ export default class Main extends Component {
         </div>
 
         {/* NOTICES */}
-
-        <div id="taskNotices-container">
+        <h2>NOTICES</h2>
+        <div className="taskNotices-container">
           {this.state.family.tasks
             .filter(task => task.status === false && task.date === this.today)
             .map((task, index) => {
               return (
-                <div key={index}>
+                
                   <Modal
                     header={task.description}
                     fixedFooter
@@ -403,20 +418,28 @@ export default class Main extends Component {
                       </div>
                     }
                   >
-                    <img src={task.tutor.photo} alt="" />
-                    <img src={task.kid.photo} alt="" />
+                    <div className="task-modal">
+                    <div className="task-modal-images">
+                      <img className="task-modal-image" src={task.tutor.photo} alt="" />
+                      <img className="task-modal-image" src={task.kid.photo} alt="" />
+                    </div>
+                    <label htmlFor="">TEXT</label>
                     <p>{task.text}</p>
+                    <label htmlFor="">DATE</label>
                     <p>{task.date}</p>
+                    <label htmlFor="">PLACE</label>
                     <p>{task.place}</p>
+                    <label htmlFor="">TASK TYPE</label>
                     <p>{task.type}</p>
+                  </div>
                   </Modal>
-                </div>
+               
               );
             })}
         </div>
 
         {/* PHOTOS */}
-
+        <h2>PHOTO GALERY</h2>
         <div>
           <Carousel
             images={this.state.family.photos.map((element,index)=>{
