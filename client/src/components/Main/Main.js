@@ -10,6 +10,9 @@ import {
   MediaBox
 } from "react-materialize";
 import AuthService from "../Tools";
+import Footer from "../Footer/Footer";
+import "./Main.css";
+import { Link } from "react-router-dom";
 
 export default class Main extends Component {
   constructor(props) {
@@ -272,56 +275,203 @@ export default class Main extends Component {
     
     
     return (
-      <div>
+      <div className="main">
+      {/* //HEADER */}
+        <div className="sec-family">
+          <div className="sec-family-user">
+          <Link to='/profile'><img className="sec-family-user-photo" src={this.state.user.photo} alt=""/></Link>
+          </div>
+          <div className="sec-family-family">
+          <Link to='/family'><h6>{this.state.family.name}</h6></Link>
+            {this.state.family.tutors.map((element,index)=>{
+              return <img className="sec-family-family-photo" src={element.photo} alt=""/>
+            })}
+          </div>
+        </div>
+
+
+        {/* //KIDS */}
+
+        <div className="sec-kids">
+            {this.state.family.kids.map((element)=>{
+              return (
+                <div className="sec-kids-card">
+                  <div className="sec-kid-card-photo-container">
+                  <img className="sec-kids-card-photo" src={element.photo} alt=""/>
+                  </div>
+                  <h5>{element.username}</h5>
+                </div>
+              )
+            })}
+        </div>
+        
+        {/* // TODO */}
+
+
+        <div className="taskList-container">
+          {tasks.map((task, index) => {
+            return (
+              <div key={index} className="todo-task">
+                <Input
+                  className="task-tik"
+                  name="status"
+                  type="checkbox"
+                  value="red"
+                  label="-"
+                  checked={!task.status}
+                  onChange={e =>
+                    this.handlerStateCheckTask(task.status, task._id)
+                  }
+                />
+                <Modal
+                  header={task.description}
+                  fixedFooter
+                  trigger={
+                    <div className="task-info">
+                      <div className="task-info-des">
+                        <h5>{task.description}</h5>
+                      </div>
+                      <div className="task-info-images">
+                        <img className="task-info-image" src={task.kid.photo} alt="" />
+                        <img className="task-info-image" src={task.tutor.photo} alt="" />
+                      </div>
+                    </div>
+                  }
+                >
+                  <img src={task.tutor.photo} alt="" />
+                  <img src={task.kid.photo} alt="" />
+                  <p>{task.text}</p>
+                  <p>{task.date}</p>
+                  <p>{task.place}</p>
+                  <p>{task.type}</p>
+                </Modal>
+              </div>
+            );
+          })}
+        </div>
+
+        {/* REMINDERS */}
+
+        <div className="remindersList-container">
+          {reminders.map((reminder, index) => {
+            return (
+              
+                <Modal
+                  header={reminder.description}
+                  fixedFooter
+                  trigger={
+                    <div className="listed-reminder">
+                      <div className="reminder-image-cont">
+                        <img className="reminder-image" src={reminder.kid.photo} alt=""/>
+                      </div>
+                      <div className="reminder-info">
+                        <h4>{reminder.date}</h4>
+                        <h4>{reminder.description}</h4>
+                      </div>
+                    </div>
+                  }
+                >
+                  <img src={reminder.kid.photo} alt="" />
+                  <p>{reminder.description}</p>
+                  <p>{reminder.date}</p>
+                </Modal>
+              
+            );
+          })}
+        </div>
+
+        {/* NOTICES */}
+
+        <div id="taskNotices-container">
+          {this.state.family.tasks
+            .filter(task => task.status === false && task.date === this.today)
+            .map((task, index) => {
+              return (
+                <div key={index}>
+                  <Modal
+                    header={task.description}
+                    fixedFooter
+                    trigger={
+                      <div className="notice">
+                      <div className="notice-images">
+                        <img className="notice-image" src={task.tutor.photo} alt=""/>
+                        <img className="notice-image" src={task.kid.photo} alt=""/>
+                      </div>
+                        <div className="notice-text">
+                          <h4>{task.description}</h4>
+                        </div>
+                      </div>
+                    }
+                  >
+                    <img src={task.tutor.photo} alt="" />
+                    <img src={task.kid.photo} alt="" />
+                    <p>{task.text}</p>
+                    <p>{task.date}</p>
+                    <p>{task.place}</p>
+                    <p>{task.type}</p>
+                  </Modal>
+                </div>
+              );
+            })}
+        </div>
+
+        {/* PHOTOS */}
+
+        <div>
+          <Carousel
+            images={this.state.family.photos.map((element,index)=>{
+              return <div key={index}><MediaBox src={element}  width="350"/></div>
+            })}
+          />
+        </div>
+
+
+
+        <div>
+          <Modal header="Modal Header" trigger={<div className="a-photo"/>}>
+            <form action="" onChange={e => this.handlerNewPhoto(e)}>
+              <Input
+                name="newphoto"
+                type="file"
+                label="File"
+                s={12}
+                onChange={e => this.handlerNewPhotoState(e)}
+              />
+              {this.state.photo === null ? (
+                <div />
+              ) : (
+                <Button
+                  className="modal-close"
+                  onChange={e => this.handlerSetPhoto(e)}
+                >
+                  DONE!
+                </Button>
+              )}
+            </form>
+          </Modal>
+        </div>
+
+
+
+
+        
+        
+
+
         <Modal
           header="ADD TASK"
           fixedFooter
-          trigger={<Button>ADD TASK</Button>}
-        >
+          trigger={<div className="a-task"/>}>
           <form action="submit" onSubmit={this.handleFormSubmit}>
-            <Input
-              type="text"
-              label="description"
-              name="description"
-              s={12}
-              onChange={e => this.handlerState(e)}
-            />
-            <Input
-              type="textarea"
-              name="text"
-              onChange={e => this.handlerState(e)}
-            />
-            <Input
-              name="date"
-              type="date"
-              onChange={e => this.handlerState(e)}
-            />
-            {/* <Input name='time' type='time' onChange={e => this.handlerState(e)} /> */}
-            <Input
-              type="text"
-              label="Place"
-              name="place"
-              s={12}
-              onChange={e => this.handlerState(e)}
-            />
-            <Input
-              s={12}
-              type="select"
-              name="type"
-              label="Select"
-              defaultValue="Select Type of Task"
-              onChange={e => this.handlerState(e)}
-            >
+            <Input type="text" label="description" name="description" s={12} onChange={e => this.handlerState(e)}/>
+            <Input type="textarea" name="text" onChange={e => this.handlerState(e)}/>
+            <Input name="date" type="date" onChange={e => this.handlerState(e)} />
+            <Input type="text" label="Place" name="place" s={12} onChange={e => this.handlerState(e)} />
+            <Input s={12} type="select" name="type" label="Select" defaultValue="Select Type of Task" onChange={e => this.handlerState(e)}>
               <option value="Education">Education</option>
               <option value="Home">Home</option>
             </Input>
-            <Input
-              s={12}
-              type="select"
-              name="tutor"
-              label="Select"
-              onChange={e => this.handlerState(e)}
-            >
+            <Input s={12} type="select" name="tutor" label="Select" onChange={e => this.handlerState(e)}>
               <option value="">Choose tutor</option>
               {this.state.family.tutors.map((element, index) => {
                 return (
@@ -331,13 +481,7 @@ export default class Main extends Component {
                 );
               })}
             </Input>
-            <Input
-              s={12}
-              type="select"
-              name="kid"
-              label="Select"
-              onChange={e => this.handlerState(e)}
-            >
+            <Input s={12} type="select" name="kid" label="Select" onChange={e => this.handlerState(e)}>
               <option value="">Choose a kid</option>
               {this.state.family.kids.map((element, index) => {
                 return (
@@ -354,10 +498,11 @@ export default class Main extends Component {
           </form>
         </Modal>
 
+
         <Modal
           header="ADD REMINDER"
           fixedFooter
-          trigger={<Button>ADD REMINDER</Button>}
+          trigger={<div className="a-reminder"/>}
         >
           <form action="submit" onSubmit={this.handleFormSubmitReminder}>
             <Input
@@ -400,152 +545,13 @@ export default class Main extends Component {
             </Button>
           </form>
         </Modal>
+        
 
-        <div id="taskList-container">
-          {tasks.map((task, index) => {
-            return (
-              <div key={index}>
-                <Input
-                  name="status"
-                  type="checkbox"
-                  value="red"
-                  label="Done"
-                  checked={!task.status}
-                  onChange={e =>
-                    this.handlerStateCheckTask(task.status, task._id)
-                  }
-                />
-                <Modal
-                  header={task.description}
-                  fixedFooter
-                  trigger={
-                    <div key={index} id="listed-task">
-                      <Col m={7} s={12}>
-                        <Card
-                          horizontal
-                          header={<CardTitle image={task.tutor.photo} />}
-                        >
-                          <h5>{task.description}</h5>
-                          <CardTitle image={task.kid.photo} />
-                        </Card>
-                      </Col>
-                    </div>
-                  }
-                >
-                  <img src={task.tutor.photo} alt="" />
-                  <img src={task.kid.photo} alt="" />
-                  <p>{task.text}</p>
-                  <p>{task.date}</p>
-                  <p>{task.place}</p>
-                  <p>{task.type}</p>
-                </Modal>
-              </div>
-            );
-          })}
-        </div>
+        
 
-        {/* REMINDERS */}
 
-        <div id="reminderskList-container">
-          {reminders.map((reminder, index) => {
-            return (
-              <div key={index}>
-                <Modal
-                  header={reminder.description}
-                  fixedFooter
-                  trigger={
-                    <div key={index} id="listed-reminder">
-                      <Col m={7} s={12}>
-                        <Card
-                          horizontal
-                          header={<CardTitle image={reminder.kid.photo} />}
-                        >
-                          <h5>{reminder.description}</h5>
-                          <h6>{reminder.date}</h6>
-                        </Card>
-                      </Col>
-                    </div>
-                  }
-                >
-                  <img src={reminder.kid.photo} alt="" />
-                  <p>{reminder.description}</p>
-                  <p>{reminder.date}</p>
-                </Modal>
-              </div>
-            );
-          })}
-        </div>
 
-        {/* NOTICES */}
 
-        <div id="taskNotices-container">
-          {this.state.family.tasks
-            .filter(task => task.status === false && task.date === this.today)
-            .map((task, index) => {
-              return (
-                <div key={index}>
-                  <Modal
-                    header={task.description}
-                    fixedFooter
-                    trigger={
-                      <div key={index} id="listed-task">
-                        <Col m={7} s={12}>
-                          <Card
-                            horizontal
-                            header={<CardTitle image={task.tutor.photo} />}
-                          >
-                            <h5>{task.description}</h5>
-                            <CardTitle image={task.kid.photo} />
-                          </Card>
-                        </Col>
-                      </div>
-                    }
-                  >
-                    <img src={task.tutor.photo} alt="" />
-                    <img src={task.kid.photo} alt="" />
-                    <p>{task.text}</p>
-                    <p>{task.date}</p>
-                    <p>{task.place}</p>
-                    <p>{task.type}</p>
-                  </Modal>
-                </div>
-              );
-            })}
-        </div>
-
-        {/* PHOTOS */}
-
-        <div>
-          <Carousel
-            images={this.state.family.photos.map((element,index)=>{
-              return <div key={index}><MediaBox src={element}  width="350"/></div>
-            })}
-          />
-        </div>
-
-        <div>
-          <Modal header="Modal Header" trigger={<Button>ADD PHOTO</Button>}>
-            <form action="" onChange={e => this.handlerNewPhoto(e)}>
-              <Input
-                name="newphoto"
-                type="file"
-                label="File"
-                s={12}
-                onChange={e => this.handlerNewPhotoState(e)}
-              />
-              {this.state.photo === null ? (
-                <div />
-              ) : (
-                <Button
-                  className="modal-close"
-                  onChange={e => this.handlerSetPhoto(e)}
-                >
-                  DONE!
-                </Button>
-              )}
-            </form>
-          </Modal>
-        </div>
       </div>
     );
   }

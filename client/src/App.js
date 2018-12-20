@@ -9,20 +9,18 @@ import Topbar from "./components/Topbar/Topbar";
 import NewKid from "./components/NewKid/NewKid";
 import Main from "./components/Main/Main";
 import InviteSignup from "./components/InviteSignup/InviteSignup";
-import { Redirect, Switch, Route } from "react-router-dom";
+import { Redirect, Switch, Route, Link } from "react-router-dom";
 import AuthService from "./components/Tools";
 import EditKid from "./components/EditKid/EditKid";
 import NewMember from "./components/NewMember/NewMember";
 
-
 class App extends Component {
-  constructor() {
-    super();
+  constructor(props) {
+    super(props);
 
     this.state = {
       user: null,
-      family: null,
-      redirect: false,
+      family: null
     };
     this.authService = new AuthService();
     this.ifLoggedIn();
@@ -49,6 +47,7 @@ class App extends Component {
     });
   };
 
+
   render() {
     console.log(this.state)
     
@@ -57,7 +56,7 @@ class App extends Component {
     }
     const logged = this.state.user ? (
       <div>
-        <Topbar className="top-bar  " />
+        
         <Switch>
           <Route
             exact
@@ -90,6 +89,13 @@ class App extends Component {
             render={() => <NewMember user={this.state}/>}
           />
         </Switch>
+        <div className="botton-bar">
+        <Link className="a-home" to='/main'><img className="footer-img-home" src="https://res.cloudinary.com/deosqppvg/image/upload/v1545315280/Canguro/elementos/home-icon-silhouette.png" alt=""/></Link>
+        <img className="footer-img-alarm" src="https://res.cloudinary.com/deosqppvg/image/upload/v1545315279/Canguro/elementos/alarm.png" alt=""/>
+        <img className="footer-img-center" src="https://res.cloudinary.com/deosqppvg/image/upload/v1545325506/Canguro/elementos/calendar-day-15.png" alt=""/>
+        <img className="footer-img" src="https://res.cloudinary.com/deosqppvg/image/upload/v1545315280/Canguro/elementos/camera.png" alt=""/>
+        <Link className="a-about" to='/about'><img className="footer-img-about" src="https://res.cloudinary.com/deosqppvg/image/upload/v1545315280/Canguro/elementos/multiple-users-silhouette.png" alt=""/></Link>
+      </div>
       </div>
     ) : (
       <div>

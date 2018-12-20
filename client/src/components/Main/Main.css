@@ -1,0 +1,229 @@
+@import url('https://fonts.googleapis.com/css?family=Leckerli+One');
+@import url('https://fonts.googleapis.com/css?family=Nunito');
+
+.main{
+  font-family: Nunito;
+  font-weight: bold;
+  font-style: normal;
+  font-stretch: normal;
+  line-height: normal;
+  letter-spacing: normal;
+  margin-bottom: 7rem;
+}
+
+
+.ironprofile{
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-content: center;
+  
+}
+
+/* HEADER */
+
+.sec-family{
+  width: 90%;
+  height: 4rem;
+  display: flex;
+  margin: 0 auto;
+  margin-top: 4%;
+  margin-bottom: 4%;
+}
+
+.sec-family-user{
+  width: 20%;
+}
+
+.sec-family-user-photo{
+  object-fit: cover;
+  height: 100%;
+  width: 73%;
+  border-radius: 50%;
+}
+
+.sec-family-family{
+  width: 80%;
+  display: flex;
+  right: 0;
+  align-items:center; 
+  justify-content: flex-end;
+}
+
+.sec-family-family-photo{
+  object-fit: cover;
+  height: 100%;
+  width: 19%;
+  border-radius: 50%;
+}
+
+.sec-family h6{
+  margin: .5rem 21px 0.4rem 0;
+  font-size: 1.3rem;
+}
+
+/* KIDS */
+
+.sec-kids{
+  margin: 0 auto;
+  width: 90%;
+  display: flex;
+  justify-content: space-between;
+  margin-top: 5%;
+  flex-wrap: wrap;
+}
+
+.sec-kids h5{
+  margin: .82rem 5px .656rem 0;
+}
+
+.sec-kids-card{
+  display: flex;
+  margin-top: 3%;
+  justify-content: space-between;
+  width: 45%;
+  height: 4rem;
+  border-radius: 10px;
+  box-shadow: 0 2px 7px 0 rgba(0, 0, 0, 0.17);
+}
+
+.sec-kid-card-photo-container{
+  width: 20%;
+  height: 100%;
+}
+
+.sec-kids-card-photo{
+  object-fit: cover;
+  border-radius: 50%;
+  height: 100%;
+}
+
+/* //TO DO */
+
+.taskList-container{
+  width: 90%;
+  margin: 0 auto;
+  border-radius: 10px;
+  box-shadow: 0 2px 7px 0 rgba(0, 0, 0, 0.17);
+  margin-top: 5%;
+  margin-bottom: 5%;
+}
+
+.todo-task{
+  width: 90%;
+  margin: 0 auto;
+  margin-top: 2%;
+  margin-bottom: 2%;
+  padding-top: 2%;
+  padding-bottom: 2%;
+  height: 3rem;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.task-info{
+  height: 100%;
+  display: flex;
+  justify-content: space-between;
+  object-fit: cover;
+  align-items: center;
+  
+}
+
+.todo-task div:nth-child(2) {
+  flex-basis: 100%;
+}
+
+.task-info-des{
+margin-left: 3%;
+}
+
+.task-info-des h5{ 
+  font-size: 1.2rem;
+  }
+
+.task-info-images{
+  display: flex;
+  height: 90%;
+  flex-direction: row-reverse;
+}
+
+.task-info-image{
+  height: 100%;
+  border-radius: 50%;
+  height: 3rem;
+  padding-top: 2%;
+  padding-bottom: 2%;
+}
+
+
+/* // REMINDERS */
+
+.remindersList-container{
+  width: 90%;
+  margin: 0 auto;
+  border-radius: 10px;
+  box-shadow: 0 2px 7px 0 rgba(0, 0, 0, 0.17);
+  margin-top: 5%;
+  margin-bottom: 5%;
+}
+
+.remindersList-container div:nth-child(1) {
+  padding: 1%;
+  height: 100%;
+}
+
+.listed-reminder{
+display: flex;
+height: 4rem;
+}
+
+.reminder-image-cont{
+height: 100%;
+width: 20%;
+}
+
+.reminder-image{
+width: 100%;
+
+}
+
+.reminder-info h4{
+  font-size: 1rem;
+    line-height: 110%;
+    margin: 0.14rem 0px 0.912rem 39px;
+}
+.a-task{
+  right: 0;
+    left: 165px;
+    width: 50px;
+    height: 50px;
+    background-repeat: no-repeat;
+    bottom: 18px;
+    position: fixed;
+    z-index: 9;
+}
+
+.a-reminder{
+  right: 0;
+  left: 97px;
+    width: 50px;
+    height: 50px;
+    background-repeat: no-repeat;
+    
+    bottom: 18px;
+    position: fixed;
+    z-index: 9;
+}
+
+.a-photo{
+  right: 0;
+  left: 228px;
+    width: 50px;
+    height: 50px;
+    background-repeat: no-repeat;
+    bottom: 18px;
+    position: fixed;
+    z-index: 9;
+}
