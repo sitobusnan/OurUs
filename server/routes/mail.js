@@ -298,7 +298,7 @@ router.post("/confirm/:token", (req, res) => {
       rol: rol,
       email: req.body.user.email,
       family: family.name,
-      photo: "noProfile"
+      photo: "https://res.cloudinary.com/deosqppvg/image/upload/v1544999242/Canguro/no_user.png"
     })
     newUser.save()
     .then((user)=>{
