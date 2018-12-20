@@ -204,23 +204,23 @@ export default class EditKid extends Component {
             <div className="editable-element">
               <h4>ALLERGIES</h4>
               <ul>
-                {this.state.allergies.map(element => {
-                  return <li>{element}</li>;
+                {this.state.allergies.map((element, index) => {
+                  return <li key={index}>{element}</li>;
                 })}
               </ul>
             </div>
             <div>{editalle}</div>
             <h4>INTOLERANCES</h4>
             <ul>
-              {this.state.vaccinations.map(element => {
-                return <li>{element}</li>;
+              {this.state.vaccinations.map((element,index) => {
+                return <li key={index}>{element}</li>;
               })}
             </ul>
             {editvac}
             <h4>VACCINATIONS</h4>
             <ul>
-              {this.state.intolerances.map(element => {
-                return <li>{element}</li>;
+              {this.state.intolerances.map((element,index) => {
+                return <li key={index}>{element}</li>;
               })}
             </ul>
             {editint}

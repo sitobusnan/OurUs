@@ -1,0 +1,46 @@
+@import url('https://fonts.googleapis.com/css?family=Leckerli+One');
+@import url('https://fonts.googleapis.com/css?family=Nunito');
+
+.aboutus{
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  margin-top: 10%;
+  font-family: 'Nunito', sans-serif;
+}
+
+.logo-img{
+  margin: 0 auto;
+  height: 8rem;
+  width: 11rem;
+  
+}
+
+.img-about{
+  margin: 0 auto;
+  height: 10rem;
+  width: 14rem;
+  border-radius: 20px;
+}
+
+.us-content{
+  margin: 0 auto;
+    margin-top: 7%;
+    display: flex;
+    flex-direction: column;
+}
+
+.aboutus h3{
+  font-weight: bold;
+    margin: 0;
+    text-align: center;
+    font-size: 2rem;
+}
+
+.aboutus h4{
+  font-weight: bold;
+    margin: 0;
+    text-align: center;
+    font-size: 2rem;
+}
+

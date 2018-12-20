@@ -3,14 +3,10 @@ import {
   Button,
   Modal,
   Input,
-  Col,
-  Card,
-  CardTitle,
   Carousel,
   MediaBox
 } from "react-materialize";
 import AuthService from "../Tools";
-import Footer from "../Footer/Footer";
 import "./Main.css";
 import { Link } from "react-router-dom";
 
@@ -284,7 +280,7 @@ export default class Main extends Component {
           <div className="sec-family-family">
           <Link to='/family'><h6>{this.state.family.name}</h6></Link>
             {this.state.family.tutors.map((element,index)=>{
-              return <img className="sec-family-family-photo" src={element.photo} alt=""/>
+              return <img key={index} className="sec-family-family-photo" src={element.photo} alt=""/>
             })}
           </div>
         </div>
@@ -293,9 +289,9 @@ export default class Main extends Component {
         {/* //KIDS */}
             <h2>KIDS</h2>
         <div className="sec-kids">
-            {this.state.family.kids.map((element)=>{
+            {this.state.family.kids.map((element, index)=>{
               return (
-                <div className="sec-kids-card">
+                <div key={index} className="sec-kids-card">
                   <div className="sec-kid-card-photo-container">
                   <img className="sec-kids-card-photo" src={element.photo} alt=""/>
                   </div>
@@ -364,7 +360,7 @@ export default class Main extends Component {
           {reminders.map((reminder, index) => {
             return (
               
-                <Modal
+                <Modal key={index}
                   header={reminder.description}
                   fixedFooter
                   trigger={
@@ -403,7 +399,7 @@ export default class Main extends Component {
             .map((task, index) => {
               return (
                 
-                  <Modal
+                  <Modal key={index}
                     header={task.description}
                     fixedFooter
                     trigger={

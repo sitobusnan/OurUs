@@ -5,7 +5,6 @@ import Login from "./components/Login/Login";
 import Signup from "./components/Signup/Signup";
 import Profile from "./components/Profile/Profile";
 import Family from "./components/Family/Family";
-import Topbar from "./components/Topbar/Topbar";
 import NewKid from "./components/NewKid/NewKid";
 import Main from "./components/Main/Main";
 import InviteSignup from "./components/InviteSignup/InviteSignup";
@@ -13,6 +12,7 @@ import { Redirect, Switch, Route, Link } from "react-router-dom";
 import AuthService from "./components/Tools";
 import EditKid from "./components/EditKid/EditKid";
 import NewMember from "./components/NewMember/NewMember";
+import AboutUs from "./components/AboutUs/AboutUs";
 
 class App extends Component {
   constructor(props) {
@@ -87,6 +87,11 @@ class App extends Component {
             exact
             path="/newmember"
             render={() => <NewMember user={this.state}/>}
+          />
+          <Route
+            exact
+            path="/about"
+            render={() => <AboutUs/>}
           />
         </Switch>
         <div className="botton-bar">
