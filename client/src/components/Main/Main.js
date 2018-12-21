@@ -221,7 +221,10 @@ export default class Main extends Component {
     const photo = e.target.files[0];
     this.authService
       .newPhoto({ photo: photo, family: this.state.family._id })
-      .then(family => {});
+      .then(family => {
+        this.setState({...this.state,family:family})
+        this.ifLoggedIn();
+      });
   };
 
   render() {
@@ -286,7 +289,7 @@ export default class Main extends Component {
         </div>
 
 
-        {/* //KIDS */}
+        {/* //KIDS
             <h2>KIDS</h2>
         <div className="sec-kids">
             {this.state.family.kids.map((element, index)=>{
@@ -297,6 +300,60 @@ export default class Main extends Component {
                   </div>
                   <h5>{element.username}</h5>
                 </div>
+              )
+            })}
+        </div> */}
+
+        {/* //KIDS */}
+        <h2>KIDS</h2>
+        <div className="sec-kids2">
+            {this.state.family.kids.map((element, index)=>{
+              return (
+                <Modal key={index}
+                  header={element.username}
+                  fixedFooter
+                  trigger={
+                    <div className="sec-kids-card2">
+                      <div className="sec-kid-card-photo-container2">
+                        <img className="sec-kids-card-photo2" src={element.photo} alt="" />
+                      </div>
+                      <h5>{element.username}</h5>
+                    </div>
+                  }>
+                  <div className="task-modal">
+                    <div className="task-modal-images">
+                      <img className="task-modal-image" src={element.photo} alt="" />
+                      <h4>{element.age} YEARS</h4>
+                    </div>
+
+                    <div className="form-editkid">
+                      <div className="editable-element">
+                        <h4>ALLERGIES</h4>
+                        <ul>
+                          {element.allergies.map((alle, index) => {
+                            return <li key={index}>{alle}</li>;
+                          })}
+                        </ul>
+                      </div>
+
+                      <h4>INTOLERANCES</h4>
+                      <ul>
+                        {element.vaccinations.map((int, index) => {
+                          return <li key={index}>{int}</li>;
+                        })}
+                      </ul>
+
+                      <h4>VACCINATIONS</h4>
+                      <ul>
+                        {element.intolerances.map((vac, index) => {
+                          return <li key={index}>{vac}</li>;
+                        })}
+                      </ul>
+
+                    </div>
+                  </div>
+                  
+                  </Modal>
               )
             })}
         </div>
@@ -399,7 +456,7 @@ export default class Main extends Component {
             .map((task, index) => {
               return (
                 
-                  <Modal key={index}
+                  <Modal  key={index}
                     header={task.description}
                     fixedFooter
                     trigger={
@@ -447,9 +504,9 @@ export default class Main extends Component {
 
 
         <div>
-          <Modal header="Modal Header" trigger={<div className="a-photo"/>}>
+          <Modal header="ADD PHOTO" trigger={<div className="a-photo"/>}>
             <form action="" onChange={e => this.handlerNewPhoto(e)}>
-              <Input
+              <Input 
                 name="newphoto"
                 type="file"
                 label="File"
@@ -459,8 +516,8 @@ export default class Main extends Component {
               {this.state.photo === null ? (
                 <div />
               ) : (
-                <Button
-                  className="modal-close"
+                <Button 
+                  className="modal-close #4a90e2 blue lighten-1"
                   onChange={e => this.handlerSetPhoto(e)}
                 >
                   DONE!
@@ -477,7 +534,7 @@ export default class Main extends Component {
         
 
 
-        <Modal
+        <Modal 
           header="ADD TASK"
           fixedFooter
           trigger={<div className="a-task"/>}>
@@ -511,7 +568,7 @@ export default class Main extends Component {
                 );
               })}
             </Input>
-            <Button className="modal-close" waves="light" type="submit">
+            <Button className="modal-close #4a90e2 blue lighten-1" waves="light" type="submit">
               Create
             </Button>
           </form>
@@ -559,7 +616,7 @@ export default class Main extends Component {
                 );
               })}
             </Input>
-            <Button className="modal-close" waves="light" type="submit">
+            <Button className="modal-close #4a90e2 blue lighten-1" waves="light" type="submit">
               Create
             </Button>
           </form>

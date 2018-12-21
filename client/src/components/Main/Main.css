@@ -110,6 +110,49 @@ h2{
   height: 100%;
 }
 
+/* //KIDS 2 */
+
+.sec-kids2{
+  margin: 0 auto;
+  width: 90%;
+  display: flex;
+  justify-content: space-between;
+  margin-top: 5%;
+  flex-wrap: wrap;
+}
+
+.sec-kids2 h5{
+  margin: .82rem 5px .656rem 0;
+}
+
+.sec-kids2 div:nth-child(n) {
+  width: 45%;
+}
+
+.sec-kids-card2{
+  display: flex;
+  margin-top: 3%;
+  justify-content: space-between;
+  width: 100%!important;
+  height: 4rem;
+  border-radius: 10px;
+  box-shadow: 0 2px 7px 0 rgba(0, 0, 0, 0.17);
+}
+
+.sec-kid-card-photo-container2{
+  width: 20%;
+  height: 100%;
+}
+
+.sec-kids-card-photo2{
+  object-fit: cover;
+  border-radius: 50%;
+  height: 100%;
+}
+
+
+
+
 /* //TO DO */
 
 .taskList-container{
