@@ -212,8 +212,8 @@ export default class Main extends Component {
   };
 
   handlerSetPhoto = e => {
-    this.setState({ ...this.state, photo: null });
-    this.ifLoggedIn();
+    // this.setState({ ...this.state, photo: null });
+    
   };
 
   handlerNewPhoto = e => {
@@ -222,12 +222,15 @@ export default class Main extends Component {
     this.authService
       .newPhoto({ photo: photo, family: this.state.family._id })
       .then(family => {
-        this.setState({...this.state,family:family})
+        
+        this.setState({family:family,photo:null})
         this.ifLoggedIn();
       });
   };
 
   render() {
+    
+    
     // TASK TO DISPLAY
     let taskToDispaly = [];
     this.state.family.tasks.forEach((element, index) => {
@@ -454,12 +457,14 @@ export default class Main extends Component {
           {this.state.family.tasks
             .filter(task => task.status === false && task.date === this.today)
             .map((task, index) => {
+              {console.log(task)}
               return (
-                
+                  
                   <Modal  key={index}
                     header={task.description}
                     fixedFooter
                     trigger={
+                      
                       <div className="notice">
                       <div className="notice-images">
                         <img className="notice-image" src={task.tutor.photo} alt=""/>
@@ -505,7 +510,7 @@ export default class Main extends Component {
 
         <div>
           <Modal header="ADD PHOTO" trigger={<div className="a-photo"/>}>
-            <form action="" onChange={e => this.handlerNewPhoto(e)}>
+            <form action="submit" onChange={e => this.handlerNewPhoto(e)}>
               <Input 
                 name="newphoto"
                 type="file"

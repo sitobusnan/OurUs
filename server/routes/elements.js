@@ -116,7 +116,10 @@ router.post("/newReminder",(req, res) => {
 router.post("/checkTask",(req, res) => {
   const toCheck = !req.body.status
   Task.findByIdAndUpdate(req.body.id,{status:toCheck},{new:true})
+  .populate('tutor')
+  .populate('kid')
   .then((task)=>{
+    
     res.status(200).json({task})
   })
   .catch((err)=>{

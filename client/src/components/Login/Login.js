@@ -34,7 +34,7 @@ export default class Login extends Component {
   }
 
   render() {
-    console.log(this.state.user)
+    
     if(this.state.redirect) {
       console.log("TPM")
       return <Redirect to="/main" />

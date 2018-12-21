@@ -180,6 +180,10 @@ router.post("/editimg", uploadCloud.single("photo"),(req, res) => {
 router.post("/newPhoto", uploadCloud.single("photo"),(req, res) => {
   
   Family.findByIdAndUpdate(req.body.family, {$push:{photos:req.file.url}}, {new: true})
+  .populate('tutors')
+    .populate('kids')
+    .populate('tasks')
+    .populate('reminders')
   .then((family)=>{
     res.status(200).json({family})
     console.log("File saved succesfull")
