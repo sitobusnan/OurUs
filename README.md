@@ -1,2 +1,2 @@
-# Canguro
-Canguro Proyecto 3
+# OurUs
+Proyecto 3 de IronHack WebDevelopBootcamp
