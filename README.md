@@ -27,6 +27,8 @@ Se trata de un gestor de información y tareas enfocado al cuidado de niños y s
   - JavaScript
   - NodeJS
   - Express
+  - Passport
+  - Bycript
   - MongoDB
   - React
   - HTML
